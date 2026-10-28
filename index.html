@@ -61,6 +61,7 @@ input[type=checkbox]{accent-color:var(--acc);width:16px;height:16px}
 @media (max-width:860px){.lb,.nm small{display:none}.hb{padding:0 10px}header{padding:8px 10px;gap:8px}}
 #fn{height:40px;width:180px;border:1px solid var(--line);border-radius:10px;padding:0 12px;font:inherit;font-size:.9rem;background:var(--bg);color:var(--ink)}#fn:focus{outline:2px solid var(--acc);outline-offset:1px}@media (max-width:860px){#fn{width:130px}}
 .ov .tb,.im .tb{position:fixed;margin:0;bottom:auto;left:0;top:0;max-width:calc(100vw - 8px);overflow-x:auto}.ov.below .tb,.im.below .tb{margin:0;bottom:auto}
+.bar select{height:30px;padding:0 6px;font-size:.85rem;border-radius:8px}
 #toast{position:fixed;bottom:calc(16px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);background:var(--ink);color:var(--panel);padding:10px 16px;border-radius:8px;display:none;z-index:20;max-width:90%}
 </style>
 </head>
@@ -132,19 +133,22 @@ window.imgLoad=async function(files){
     }catch(e){console.error(e);toast("تعذّر تحويل «"+f.name+"»: "+((e&&e.message)||e))}
   }
 };
-window.imgOcr=async function(pg){
+window.imgOcr=async function(pg,lang){
   if(window.ocrBusy)return toast("يوجد تحليل جارٍ، انتظر حتى ينتهي.");
   window.ocrBusy=true;
   try{
     toast("جارٍ تحليل النص… قد يستغرق دقيقة في أول مرة.");
     await loadTess();
-    const w=await Tesseract.createWorker(["ara","eng"]);
+    const w=await Tesseract.createWorker((lang||"ara").split("+"));
     const {data}=await w.recognize(pg.src.blob);
     await w.terminate();
     const {kx,ky}=pg.src;
-    pg.ocr=(data.lines||[]).filter(l=>l.text.trim()&&l.confidence>35).map(l=>({t:l.text.trim().replace(/\s+/g," "),x0:l.bbox.x0*kx,x1:l.bbox.x1*kx,y0:l.bbox.y0*ky,y1:l.bbox.y1*ky}));
+    const raw=(data.lines||[]).map(l=>({t:l.text.trim().replace(/\s+/g," "),c:l.confidence,x0:l.bbox.x0*kx,x1:l.bbox.x1*kx,y0:l.bbox.y0*ky,y1:l.bbox.y1*ky})).filter(o=>o.t.length>=2&&o.c>55&&(o.t.match(/[\p{L}\p{N}]/gu)||[]).length>=2&&(o.y1-o.y0)<90&&(o.x1-o.x0)>12);
+    raw.sort((a,b)=>b.c-a.c);const keep=[];
+    for(const o of raw){const ov=keep.some(k=>{const w=Math.min(o.x1,k.x1)-Math.max(o.x0,k.x0),h=Math.min(o.y1,k.y1)-Math.max(o.y0,k.y0);if(w<=0||h<=0)return false;const a=Math.min((o.x1-o.x0)*(o.y1-o.y0),(k.x1-k.x0)*(k.y1-k.y0));return w*h>.4*a});if(!ov)keep.push(o)}
+    pg.ocr=keep;
     render();
-    toast(pg.ocr.length?"تم التعرّف على "+pg.ocr.length+" سطرًا. فعّل «تعديل النص» واضغط أي سطر لتعديله.":"لم أجد نصًا في الصورة.");
+    toast(keep.length?"تم التعرّف على "+keep.length+" سطرًا واضحًا. فعّل «تعديل النص» واضغط أي سطر. إن كانت النتيجة سيئة اضغط «مسح التحليل».":"لم أجد نصًا واضحًا في الصورة. جرّب لغة أخرى.");
   }catch(e){console.error(e);toast("تعذّر تحليل النص: يحتاج إنترنت ولا يعمل داخل تطبيق Claude، افتح الملف مباشرة من Safari. ("+((e&&e.message)||e)+")")}
   finally{window.ocrBusy=false}
 };
@@ -198,7 +202,7 @@ async function render(){
       mk("تدوير",()=>{if(pg.ov.length||(pg.img||[]).length)return toast("احذف النص أو الصور المضافة قبل تدوير هذه الصفحة.");pg.rot=(pg.rot+90)%360;render()}),
       mk("↑",()=>{if(n>0){[pages[n-1],pages[n]]=[pages[n],pages[n-1]];render()}}),
       mk("↓",()=>{if(n<pages.length-1){[pages[n+1],pages[n]]=[pages[n],pages[n+1]];render()}}),
-      mk("حذف",()=>{pages.splice(n,1);render()},"x"));if(pg.src&&!pg.ocr)bar.append(mk("تحليل النص",()=>window.imgOcr&&imgOcr(pg)));
+      mk("حذف",()=>{pages.splice(n,1);render()},"x"));if(pg.src){if(!pg.ocr){const ls=document.createElement("select");ls.setAttribute("aria-label","لغة النص");[["ara","عربي"],["eng","English"],["ara+eng","عربي + English"]].forEach(([v,t])=>ls.add(new Option(t,v)));bar.append(ls,mk("تحليل النص",()=>window.imgOcr&&imgOcr(pg,ls.value)))}else bar.append(mk("مسح التحليل",()=>{pg.ocr=null;pg.ov=pg.ov.filter(o=>!o.cover);render()}))}
     const wrap=document.createElement("div");wrap.className="wrap"+(pg.sel?" sel":"")+(addMode?" add":"");
     const cv=document.createElement("canvas");cv.width=vp.width;cv.height=vp.height;cv.style.width=vp.width/1.3+"px";cv.style.height=vp.height/1.3+"px";
     wrap.style.width=vp.width/1.3+"px";wrap.style.height=vp.height/1.3+"px";wrap.append(cv);
@@ -248,7 +252,8 @@ async function buildDet(wrap,pg,page,s){
     Object.assign(d.style,{left:g.l/W*100+"%",top:top/H*100+"%",width:(g.r-g.l)/W*100+"%",height:bh/H*100+"%"});
     d.onclick=e=>{
       e.stopPropagation();
-      const sz=Math.min(72,Math.max(8,Math.round(g.h)));
+      let sz=Math.min(72,Math.max(8,Math.round(g.h)));
+      if(g.fn===null){sz=Math.max(6,Math.round(g.h*.78));try{const cx=document.createElement("canvas").getContext("2d");cx.font=sz+"px "+FONTS[0][1]+",Arial,sans-serif";const mw=cx.measureText(text).width,bw=g.r-g.l;if(mw>bw*1.02)sz=Math.max(6,Math.floor(sz*bw/mw))}catch(e){}}
       const bgc=sampleBg(wrap,g,W,top,bh),o={x:g.l/W,y:(g.b-.93*sz)/H,t:text,f:origFont(g.fn,tc.styles[g.fn]),c:sampleC(wrap,g,W,top,bh,bgc),b:isBold(page,g.fn),s:sz,key,cover:{x:(g.l-1)/W,y:(top-1)/H,w:(g.r-g.l+2)/W,h:(bh+2)/H,bg:bgc}};
       pg.ov.push(o);d.remove();
       const el=mkOv(pg,o,s,wrap);wrap.append(el);el.focus();
