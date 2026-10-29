@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <title>الفلقي لتعديل PDF</title>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;600&family=Cairo:wght@400;700&family=Amiri:wght@400;700&family=Tajawal:wght@400;700&family=Noto+Naskh+Arabic:wght@400;700&family=Playfair+Display:wght@400;700&family=Caveat:wght@400;700&family=Almarai:wght@400;700&family=Reem+Kufi&family=El+Messiri&family=Aref+Ruqaa&family=Lemonada&family=Markazi+Text&family=Lateef&family=Pacifico&family=Lobster&family=Bebas+Neue&family=Dancing+Script&family=Oswald&family=Roboto+Slab&display=swap" rel="stylesheet">
 <style>
@@ -62,13 +62,42 @@ input[type=checkbox]{accent-color:var(--acc);width:16px;height:16px}
 #fn{height:40px;width:180px;border:1px solid var(--line);border-radius:10px;padding:0 12px;font:inherit;font-size:.9rem;background:var(--bg);color:var(--ink)}#fn:focus{outline:2px solid var(--acc);outline-offset:1px}@media (max-width:860px){#fn{width:130px}}
 .ov .tb,.im .tb{position:fixed;margin:0;bottom:auto;left:0;top:0;max-width:calc(100vw - 8px);overflow-x:auto}.ov.below .tb,.im.below .tb{margin:0;bottom:auto}
 .bar select{height:30px;padding:0 6px;font-size:.85rem;border-radius:8px}
+main{touch-action:pan-x pan-y}
+.ov{touch-action:none}.ov.edit{touch-action:auto}
+.ov:not(.edit) .t{user-select:none;-webkit-user-select:none;cursor:move}.ov.edit .t{cursor:text}
+.ov .rzt{display:none;position:absolute;right:-14px;bottom:-14px;width:28px;height:28px;border-radius:50%;background:var(--acc);border:3px solid var(--panel);touch-action:none;cursor:nwse-resize}.ov.sel .rzt{display:block}
+.ov .tb{flex-direction:column;align-items:stretch;gap:6px;padding:8px;border-radius:14px;max-width:calc(100vw - 8px);overflow:visible}
+.ov .tb .r1,.ov .tb .r2{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.ov .tb button,.ov .tb select,.ov .tb input{height:42px;font-size:15px;border-radius:10px}
+.ov .tb button{min-width:42px;padding:0 8px}.ov .tb .m,.ov .tb .d{width:42px}
+.ov .tb select{flex:1;min-width:130px;max-width:none}.ov .tb input[type=color]{width:46px;padding:2px}
+.ov .tb .sw{width:30px;min-width:30px;height:30px;border-radius:50%;border:2px solid var(--line);padding:0}
+.ov .tb .sz{min-width:30px;text-align:center;font-weight:600}
+.im .rz{width:30px;height:30px;right:-14px;bottom:-14px}.im .tb button{height:42px;min-width:44px;font-size:17px}
+#zv{cursor:pointer}
+#imgfit{height:36px;font-size:.85rem;border-radius:9px;padding:0 6px;border:0;background:transparent;color:var(--ink)}
+#spm{position:fixed;inset:0;z-index:15;background:rgba(0,0,0,.55);display:none;align-items:center;justify-content:center;padding:16px}#spm.on{display:flex}
+#spm .bx{background:var(--panel);border-radius:18px;padding:16px;width:min(100%,460px);box-shadow:0 12px 40px rgba(0,0,0,.35)}
+#spm h2{margin:0 0 4px;font-size:1.1rem}#spm p{margin:0 0 10px;color:var(--mut);font-size:.9rem}
+#spm .opt{display:flex;gap:8px;align-items:center;padding:10px 0;border-top:1px solid var(--line);flex-wrap:wrap}
+#spm input[type=number],#spm input[type=text]{border:1px solid var(--line);border-radius:8px;padding:0 8px;background:var(--bg);color:var(--ink);font:inherit;height:38px}
+#spm input[type=number]{width:70px}#spm input[type=text]{flex:1;min-width:140px}
+#spm .r{display:flex;gap:8px;margin-top:12px;align-items:center}
+#mgm,#tlm{position:fixed;inset:0;z-index:15;background:rgba(0,0,0,.55);display:none;align-items:center;justify-content:center;padding:16px}#mgm.on,#tlm.on{display:flex}
+#mgm .bx,#tlm .bx{background:var(--panel);border-radius:18px;padding:16px;width:min(100%,480px);max-height:88vh;overflow:auto;box-shadow:0 12px 40px rgba(0,0,0,.35)}
+#mgm h2,#tlm h2{margin:0 0 6px;font-size:1.1rem}#mgm p{margin:0 0 8px;color:var(--mut);font-size:.9rem}
+.mrow{display:flex;gap:6px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line)}.mrow span{flex:1;font-size:.9rem;word-break:break-all}
+#mgm .r,#tlm .r{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:12px}
+.tsec{margin:12px 0}.tsec h3{margin:0 0 6px;font-size:.92rem}.tsec input[type=text]{width:100%;height:40px;border:1px solid var(--line);border-radius:8px;padding:0 10px;font:inherit;background:var(--bg);color:var(--ink)}.qa{display:flex;flex-wrap:wrap;gap:6px}
+main{touch-action:pan-x pan-y}
+@media (pointer:coarse){.ov .tb button,.ov .tb select,.ov .tb input{height:42px;font-size:15px;min-width:42px}.ov .tb .sw{width:34px;min-width:34px;height:34px}.ov .rzt{width:36px;height:36px;right:-18px;bottom:-18px}.bar button{padding:8px 12px}.bar input[type=checkbox]{width:22px;height:22px}.hb{height:42px}#mgm button,#tlm button{min-height:40px}}
 #toast{position:fixed;bottom:calc(16px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);background:var(--ink);color:var(--panel);padding:10px 16px;border-radius:8px;display:none;z-index:20;max-width:90%}
 </style>
 </head>
 <body>
 <header>
   <div class="brand"><span class="logo"><svg class="ic" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 14h6M9 17h4"/></svg></span><span class="nm">الفلقي<small>لتعديل PDF</small></span></div>
-  <div class="grp"><label class="btn hb" title="فتح / إضافة ملفات PDF"><svg class="ic" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg><span class="lb">فتح</span><input id="file" type="file" accept="application/pdf" multiple hidden></label><label class="btn hb" title="تحويل صورة إلى PDF"><svg class="ic" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></svg><span class="lb">صورة</span><input id="fimg" type="file" accept="image/*" multiple hidden></label></div>
+  <div class="grp"><label class="btn hb" title="فتح / إضافة ملفات PDF"><svg class="ic" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg><span class="lb">فتح</span><input id="file" type="file" accept="application/pdf" multiple hidden></label><label class="btn hb" title="تحويل صورة إلى PDF"><svg class="ic" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></svg><span class="lb">صورة</span><input id="fimg" type="file" accept="image/*" multiple hidden></label><select id="imgfit" title="حجم صفحة PDF عند تحويل الصور" aria-label="حجم الصفحة"><option value="a4">A4</option><option value="a4full">A4 ملء</option><option value="a5">A5</option><option value="a3">A3</option><option value="letter">Letter</option><option value="img">بحجم الصورة</option></select></div>
   <div class="grp"><button class="hb" id="zo" title="تصغير">−</button><span id="zv">100%</span><button class="hb" id="zi" title="تكبير">+</button></div>
   <div class="grp"><button class="hb" id="ud" title="تراجع (Ctrl+Z)" aria-label="تراجع" disabled><svg class="ic" viewBox="0 0 24 24"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg><span class="lb">تراجع</span></button><button class="hb" id="rd" title="إعادة (Ctrl+Y)" aria-label="إعادة" disabled><svg class="ic" viewBox="0 0 24 24"><path d="m15 14 5-5-5-5"/><path d="M20 9H9.5a5.5 5.5 0 0 0 0 11H13"/></svg><span class="lb">إعادة</span></button></div>
   <div class="grp">
@@ -77,6 +106,9 @@ input[type=checkbox]{accent-color:var(--acc);width:16px;height:16px}
    <label class="btn hb" title="إضافة صورة"><svg class="ic" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></svg><span class="lb">صورة</span><input id="img" type="file" accept="image/png,image/jpeg" hidden></label>
    <button class="hb" id="sig" title="توقيع"><svg class="ic" viewBox="0 0 24 24"><path d="M3 17c3 0 4-8 7-8s1 8 4 8 3-4 7-4"/></svg><span class="lb">توقيع</span></button>
    <button class="hb" id="pn" title="ترقيم الصفحات بأرقام عربية"><svg class="ic" viewBox="0 0 24 24"><path d="M4 9h16M4 15h16M10 3 8 21M16 3l-2 18"/></svg><span class="lb">ترقيم</span></button>
+   <button class="hb" id="spl" title="تقسيم الملف"><svg class="ic" viewBox="0 0 24 24"><circle cx="6" cy="6" r="3"/><path d="M8.1 8.1 12 12"/><path d="M20 4 8.1 15.9"/><circle cx="6" cy="18" r="3"/><path d="M14.8 14.8 20 20"/></svg><span class="lb">تقسيم</span></button>
+   <button class="hb" id="mrg" title="دمج الملفات وترتيبها"><svg class="ic" viewBox="0 0 24 24"><path d="M6 4v6a4 4 0 0 0 4 4h8M18 4v6a4 4 0 0 1-4 4"/><path d="m15 11 3 3-3 3"/></svg><span class="lb">دمج</span></button>
+   <button class="hb" id="tls" title="أدوات: علامة مائية، خصائص، عمليات سريعة"><svg class="ic" viewBox="0 0 24 24"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg><span class="lb">أدوات</span></button>
   </div>
   
   <span class="sp"></span>
@@ -86,6 +118,17 @@ input[type=checkbox]{accent-color:var(--acc);width:16px;height:16px}
 <main id="main">
   <div id="empty"><div class="lg"><svg class="ic" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 14h6M9 17h4"/></svg></div><h1>الفلقي لتعديل PDF</h1><div>اسحب ملف PDF هنا أو اختره من جهازك. كل شيء يتم داخل المتصفح ولا تُرفع ملفاتك إلى أي مكان.</div><label for="file" class="btn cta">فتح ملف PDF</label><br><label for="fimg" class="btn cta" style="background:var(--bg);color:var(--ink);border-color:var(--line);margin-top:0;box-shadow:none">تحويل صورة إلى PDF</label><div class="chips"><span>تحويل الصور إلى PDF</span><span>دمج الملفات</span><span>تعديل النص الموجود</span><span>صور وتوقيع</span><span>ترقيم عربي</span><span>ترتيب وتدوير وحذف</span></div></div>
 </main>
+<div id="spm"><div class="bx" role="dialog" aria-label="تقسيم الملف"><h2>تقسيم الملف</h2><p id="spinfo"></p>
+<label class="opt"><input type="radio" name="spmode" value="each" checked> كل صفحة في ملف مستقل</label>
+<label class="opt"><input type="radio" name="spmode" value="every"> كل <input id="spn" type="number" min="1" value="2"> صفحات في ملف</label>
+<label class="opt"><input type="radio" name="spmode" value="ranges"> نطاقات مخصّصة <input id="spr" type="text" dir="ltr" placeholder="1-3, 4, 5-8"></label>
+<div class="r"><button id="spx">إلغاء</button><span class="sp"></span><button id="spok" class="p">تقسيم وتنزيل ZIP</button></div></div></div>
+<div id="mgm"><div class="bx" role="dialog" aria-label="دمج الملفات"><h2>دمج الملفات</h2><p>رتّب الملفات بالأسهم أو احذف ما لا تريده، ثم اضغط «تطبيق». لإضافة ملف جديد استخدم «إضافة ملف».</p><div id="mglist"></div><div class="r"><label for="file" class="btn">+ إضافة ملف</label><span class="sp"></span><button id="mgx">إلغاء</button><button id="mgok" class="p">تطبيق</button></div></div></div>
+<div id="tlm"><div class="bx" role="dialog" aria-label="أدوات"><h2>أدوات إضافية</h2>
+<div class="tsec"><h3>علامة مائية (تُضاف عند التنزيل على كل الصفحات)</h3><input id="wmt" type="text" dir="auto" placeholder="مثال: سري / مسودة / اسم الجهة"><div class="r"><label>الشفافية <select id="wmo"><option value="0.10">خفيفة</option><option value="0.18" selected>متوسطة</option><option value="0.30">واضحة</option></select></label></div></div>
+<div class="tsec"><h3>خصائص الملف</h3><input id="mti" type="text" dir="auto" placeholder="العنوان"><div style="height:6px"></div><input id="mau" type="text" dir="auto" placeholder="المؤلف"></div>
+<div class="tsec"><h3>عمليات سريعة</h3><div class="qa"><button id="qrot">تدوير الكل</button><button id="qrev">عكس الترتيب</button><button id="qsel">تحديد الكل</button><button id="qdel">حذف المحدد</button></div></div>
+<div class="r"><button id="tlx">إغلاق</button><span class="sp"></span><button id="tlok" class="p">حفظ الإعدادات</button></div></div></div>
 <div id="sg"><div class="bx" role="dialog" aria-label="التوقيع"><h2>ارسم توقيعك</h2><p>ارسم بإصبعك أو بالفأرة داخل المربع الأبيض.</p><canvas id="sgc"></canvas><div class="r"><input id="sgcol" type="color" value="#111111" aria-label="لون التوقيع"><button id="sgx">مسح</button><span class="sp"></span><button id="sgn">إلغاء</button><button id="sgok" class="p">إدراج</button></div></div></div>
 <div id="toast"></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
@@ -93,10 +136,10 @@ input[type=checkbox]{accent-color:var(--acc);width:16px;height:16px}
 <script type="text/plain" id="imgmod">
 (function(){
 const A4=842/595;
-function loadTess(){if(window.Tesseract)return Promise.resolve();return new Promise((res,rej)=>{const s=document.createElement("script");s.src="https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js";s.onload=res;s.onerror=()=>rej(new Error("لا يوجد اتصال"));document.head.append(s)})}
 const MIME={jpg:"image/jpeg",jpeg:"image/jpeg",jfif:"image/jpeg",png:"image/png",gif:"image/gif",webp:"image/webp",bmp:"image/bmp",avif:"image/avif",heic:"image/heic",heif:"image/heif",tif:"image/tiff",tiff:"image/tiff",svg:"image/svg+xml",ico:"image/x-icon"};
+function loadTess(){if(window.Tesseract)return Promise.resolve();return new Promise((res,rej)=>{const s=document.createElement("script");s.src="https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js";s.onload=res;s.onerror=()=>rej(new Error("لا يوجد اتصال"));document.head.append(s)})}
 async function decode(f){
-  const ext=(f.name.split(".").pop()||"").toLowerCase();
+  const ext=((f.name||"").split(".").pop()||"").toLowerCase();
   try{if(window.createImageBitmap){const bm=await createImageBitmap(f);return{el:bm,w:bm.width,h:bm.height}}}catch(e){}
   let du=await new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result);r.onerror=()=>rej(new Error("تعذّرت قراءة الملف"));r.readAsDataURL(f)});
   if(!/^data:image\//.test(du)&&MIME[ext])du=du.replace(/^data:[^,]*,/,"data:"+MIME[ext]+";base64,");
@@ -111,17 +154,22 @@ async function decode(f){
 async function toPdf(f){
   const d0=await decode(f),W=d0.w,H=d0.h;
   if(!W||!H)throw new Error("الصورة فارغة");
-  const sc=Math.min(1,2400/Math.max(W,H)),cw=Math.max(1,Math.round(W*sc)),ch=Math.max(1,Math.round(H*sc));
+  const sc=Math.min(1,2600/Math.max(W,H)),cw=Math.max(1,Math.round(W*sc)),ch=Math.max(1,Math.round(H*sc));
   const c=document.createElement("canvas");c.width=cw;c.height=ch;
   const g=c.getContext("2d");g.fillStyle="#fff";g.fillRect(0,0,cw,ch);g.drawImage(d0.el,0,0,cw,ch);
-  let blob=await new Promise(r=>c.toBlob(r,"image/jpeg",.9));
-  if(!blob){const b64=c.toDataURL("image/jpeg",.9).split(",")[1];blob=new Blob([Uint8Array.from(atob(b64),x=>x.charCodeAt(0))],{type:"image/jpeg"})}
-  const bytes=new Uint8Array(await blob.arrayBuffer()),r=ch/cw;let pw,ph;
-  if(r>=1){pw=595;ph=Math.abs(r-A4)/A4<.08?842:Math.round(595*r)}
-  else{ph=595;pw=Math.abs(1/r-A4)/A4<.08?842:Math.round(595/r)}
+  let blob=await new Promise(r=>c.toBlob(r,"image/jpeg",.92));
+  if(!blob){const b64=c.toDataURL("image/jpeg",.92).split(",")[1];blob=new Blob([Uint8Array.from(atob(b64),x=>x.charCodeAt(0))],{type:"image/jpeg"})}
+  const bytes=new Uint8Array(await blob.arrayBuffer()),r=ch/cw,mode=(document.getElementById("imgfit")||{}).value||"a4";
+  let pw,ph,x,y,w,h;
+  if(mode==="img"){if(r>=1){pw=595;ph=Math.round(595*r)}else{ph=595;pw=Math.round(595/r)}x=0;y=0;w=pw;h=ph}
+  else{
+    const SZ={a4:[595,842],a4full:[595,842],a5:[420,595],a3:[842,1191],letter:[612,792]}[mode]||[595,842],AR=SZ[1]/SZ[0],land=r<1;pw=land?SZ[1]:SZ[0];ph=land?SZ[0]:SZ[1];
+    if(mode==="a4full"&&Math.abs((land?1/r:r)-AR)/AR<.12){x=0;y=0;w=pw;h=ph}
+    else{const m=mode==="a4full"?0:18,k=Math.min((pw-2*m)/cw,(ph-2*m)/ch);w=cw*k;h=ch*k;x=(pw-w)/2;y=(ph-h)/2}
+  }
   const d=await PDFLib.PDFDocument.create(),im=await d.embedJpg(bytes);
-  d.addPage([pw,ph]).drawImage(im,{x:0,y:0,width:pw,height:ph});
-  return {pdf:await d.save(),src:{blob,kx:pw/cw,ky:ph/ch}};
+  d.addPage([pw,ph]).drawImage(im,{x,y:ph-y-h,width:w,height:h});
+  return {pdf:await d.save(),src:{blob,ox:x,oy:y,dw:w,dh:h}};
 }
 window.imgLoad=async function(files){
   for(const f of files){
@@ -129,21 +177,40 @@ window.imgLoad=async function(files){
       toast("جارٍ تحويل «"+f.name+"» إلى PDF…");
       const t=await toPdf(f),before=pages.length;
       await load([new File([t.pdf],f.name.replace(/\.[^.]*$/,"")+".pdf",{type:"application/pdf"})]);
-      if(pages.length>before){pages[before].src=t.src;render();toast("تم تحويل الصورة إلى PDF بحجم الورقة. لتحليل نصها اضغط «تحليل النص» فوق الصفحة.")}
+      if(pages.length>before){pages[before].src=t.src;render();toast("تم تحويل الصورة إلى PDF. لتحليل نصها اختر اللغة واضغط «تحليل النص» فوق الصفحة.")}
     }catch(e){console.error(e);toast("تعذّر تحويل «"+f.name+"»: "+((e&&e.message)||e))}
   }
 };
+async function prep(blob){
+  const d0=await decode(blob),W=d0.w,H=d0.h,sc=Math.min(2.5,Math.max(1,2200/Math.max(W,H))),c=document.createElement("canvas");
+  c.width=Math.round(W*sc);c.height=Math.round(H*sc);
+  const g=c.getContext("2d");g.fillStyle="#fff";g.fillRect(0,0,c.width,c.height);g.imageSmoothingQuality="high";g.drawImage(d0.el,0,0,c.width,c.height);
+  try{
+    const id=g.getImageData(0,0,c.width,c.height),d=id.data,hist=new Uint32Array(256),tot=c.width*c.height;let sum=0;
+    for(let i=0;i<d.length;i+=4){const y=Math.round(.299*d[i]+.587*d[i+1]+.114*d[i+2]);d[i]=d[i+1]=d[i+2]=y;hist[y]++;sum+=y}
+    let a=0,lo=0,hi=255;
+    for(let i=0;i<256;i++){a+=hist[i];if(a>=tot*.01){lo=i;break}}
+    a=0;for(let i=255;i>=0;i--){a+=hist[i];if(a>=tot*.01){hi=i;break}}
+    const inv=sum/tot<110,k=hi-lo>30?255/(hi-lo):1,o=hi-lo>30?lo:0;
+    for(let i=0;i<d.length;i+=4){let v=Math.max(0,Math.min(255,(d[i]-o)*k));if(inv)v=255-v;d[i]=d[i+1]=d[i+2]=v}
+    g.putImageData(id,0,0);
+  }catch(e){}
+  return c;
+}
 window.imgOcr=async function(pg,lang){
   if(window.ocrBusy)return toast("يوجد تحليل جارٍ، انتظر حتى ينتهي.");
   window.ocrBusy=true;
   try{
-    toast("جارٍ تحليل النص… قد يستغرق دقيقة في أول مرة.");
+    toast("جارٍ تحسين الصورة وتحليل النص… قد يستغرق دقيقة في أول مرة.");
     await loadTess();
-    const w=await Tesseract.createWorker((lang||"ara").split("+"));
-    const {data}=await w.recognize(pg.src.blob);
+    const langs=(lang||"ara").split("+"),c=await prep(pg.src.blob);
+    let w;
+    try{w=await Tesseract.createWorker(langs,1,{langPath:"https://tessdata.projectnaptha.com/4.0.0_best"})}catch(e){w=await Tesseract.createWorker(langs)}
+    try{await w.setParameters({preserve_interword_spaces:"1",user_defined_dpi:"300"})}catch(e){}
+    const {data}=await w.recognize(c);
     await w.terminate();
-    const {kx,ky}=pg.src;
-    const raw=(data.lines||[]).map(l=>({t:l.text.trim().replace(/\s+/g," "),c:l.confidence,x0:l.bbox.x0*kx,x1:l.bbox.x1*kx,y0:l.bbox.y0*ky,y1:l.bbox.y1*ky})).filter(o=>o.t.length>=2&&o.c>55&&(o.t.match(/[\p{L}\p{N}]/gu)||[]).length>=2&&(o.y1-o.y0)<90&&(o.x1-o.x0)>12);
+    const {ox,oy,dw,dh}=pg.src,mx=dw/c.width,my=dh/c.height;
+    const raw=(data.lines||[]).map(l=>({t:l.text.trim().replace(/\s+/g," "),c:l.confidence,x0:ox+l.bbox.x0*mx,x1:ox+l.bbox.x1*mx,y0:oy+l.bbox.y0*my,y1:oy+l.bbox.y1*my})).filter(o=>o.t.length>=2&&o.c>50&&(o.t.match(/[\p{L}\p{N}]/gu)||[]).length>=2&&(o.y1-o.y0)<90&&(o.x1-o.x0)>12);
     raw.sort((a,b)=>b.c-a.c);const keep=[];
     for(const o of raw){const ov=keep.some(k=>{const w=Math.min(o.x1,k.x1)-Math.max(o.x0,k.x0),h=Math.min(o.y1,k.y1)-Math.max(o.y0,k.y0);if(w<=0||h<=0)return false;const a=Math.min((o.x1-o.x0)*(o.y1-o.y0),(k.x1-k.x0)*(k.y1-k.y0));return w*h>.4*a});if(!ov)keep.push(o)}
     pg.ocr=keep;
@@ -160,21 +227,65 @@ const $=id=>document.getElementById(id);
 const docs=[];            // {bytes, pdf}
 let pages=[];             // {d, i, rot, nat, sel, ov:[{x,y,t}]}
 let zoom=1,addMode=false,dl=null;
-const FONTS=[["IBM Plex",'"IBM Plex Sans Arabic"'],["Cairo","Cairo"],["Tajawal","Tajawal"],["Amiri (كلاسيكي)","Amiri"],["Noto Naskh (عربي)",'"Noto Naskh Arabic"'],["Playfair (إنجليزي)",'"Playfair Display"'],["Caveat (إنجليزي)","Caveat"],["Almarai (عربي)","Almarai"],["Reem Kufi (كوفي)",'"Reem Kufi"'],["El Messiri (عربي)",'"El Messiri"'],["Aref Ruqaa (رقعة)",'"Aref Ruqaa"'],["Lemonada (عربي)","Lemonada"],["Markazi (عربي)",'"Markazi Text"'],["Lateef (عربي)","Lateef"],["Pacifico (إنجليزي)","Pacifico"],["Lobster (إنجليزي)","Lobster"],["Bebas Neue (إنجليزي)",'"Bebas Neue"'],["Dancing Script (إنجليزي)",'"Dancing Script"'],["Oswald (إنجليزي)","Oswald"],["Roboto Slab (إنجليزي)",'"Roboto Slab"'],["Serif","Georgia,serif"],["Mono",'"Courier New",monospace']];
+const FONTS=[
+["IBM Plex (حديث)",'"IBM Plex Sans Arabic"',"IBM+Plex+Sans+Arabic"],
+["Cairo (القاهرة)","Cairo","Cairo"],
+["Tajawal (تجوّل)","Tajawal","Tajawal"],
+["Almarai (المراعي)","Almarai","Almarai"],
+["Noto Sans Arabic (واضح)",'"Noto Sans Arabic"',"Noto+Sans+Arabic"],
+["Noto Kufi (كوفي حديث)",'"Noto Kufi Arabic"',"Noto+Kufi+Arabic"],
+["Readex Pro (مقروء)",'"Readex Pro"',"Readex+Pro"],
+["Mada (مدى)","Mada","Mada"],
+["Changa (عريض)","Changa","Changa"],
+["Rubik (دائري)","Rubik","Rubik"],
+["Baloo Bhaijaan (مرح)",'"Baloo Bhaijaan 2"',"Baloo+Bhaijaan+2"],
+["Marhey (مرحى)","Marhey","Marhey"],
+["Amiri (نسخ كلاسيكي)","Amiri","Amiri"],
+["Noto Naskh (نسخ)",'"Noto Naskh Arabic"',"Noto+Naskh+Arabic"],
+["Scheherazade (شهرزاد)",'"Scheherazade New"',"Scheherazade+New"],
+["Lateef (لطيف)","Lateef","Lateef"],
+["Harmattan (هرمتان)","Harmattan","Harmattan"],
+["Markazi (مركزي)",'"Markazi Text"',"Markazi+Text"],
+["El Messiri (المسيري)",'"El Messiri"',"El+Messiri"],
+["Reem Kufi (كوفي)",'"Reem Kufi"',"Reem+Kufi"],
+["Kufam (كوفام)","Kufam","Kufam"],
+["Aref Ruqaa (رقعة)",'"Aref Ruqaa"',"Aref+Ruqaa"],
+["Katibeh (خط يد)","Katibeh","Katibeh"],
+["Lemonada (ليمونادا)","Lemonada","Lemonada"],
+["Mirza (نستعليق)","Mirza","Mirza"],
+["Rakkas (عناوين)","Rakkas","Rakkas"],
+["Jomhuria (عناوين ضيقة)","Jomhuria","Jomhuria"],
+["Vibes (زخرفي)","Vibes","Vibes"],
+["Playfair Display",'"Playfair Display"',"Playfair+Display","en"],
+["Roboto Slab",'"Roboto Slab"',"Roboto+Slab","en"],
+["Oswald","Oswald","Oswald","en"],
+["Bebas Neue",'"Bebas Neue"',"Bebas+Neue","en"],
+["Lobster","Lobster","Lobster","en"],
+["Pacifico","Pacifico","Pacifico","en"],
+["Dancing Script",'"Dancing Script"',"Dancing+Script","en"],
+["Caveat","Caveat","Caveat","en"],
+["Serif","Georgia,serif",null,"en"],
+["Mono",'"Courier New",monospace',null,"en"]];
+const FBASE=FONTS.length;
+FONTS.forEach(f=>{if(f[2]){const l=document.createElement("link");l.rel="stylesheet";l.href="https://fonts.googleapis.com/css2?family="+f[2]+"&display=swap";document.head.append(l)}});
+function fontOpts(sel,val){const g1=document.createElement("optgroup"),g2=document.createElement("optgroup"),g3=document.createElement("optgroup");g1.label="خطوط عربية";g2.label="خطوط إنجليزية";g3.label="خط الملف الأصلي";FONTS.forEach((f,i)=>{const op=new Option(f[0],i);(i>=FBASE?g3:f[3]==="en"?g2:g1).append(op)});sel.append(g1,g2);if(FONTS.length>FBASE)sel.append(g3);sel.value=val}
 const def={f:0,c:"#000000",s:14};let cur=null;
 const toast=m=>{const t=$("toast");t.textContent=m;t.style.display="block";clearTimeout(toast.h);toast.h=setTimeout(()=>t.style.display="none",3500)};
 
 async function load(files){
+  const had=pages.length;
   for(const f of files){
     try{
       const bytes=new Uint8Array(await f.arrayBuffer());if(!$("fn").value)$("fn").value=f.name.replace(/\.pdf$/i,"")+"-معدّل";
       const pdf=await pdfjsLib.getDocument({data:bytes.slice()}).promise;
-      const d=docs.push({bytes,pdf})-1;
+      const d=docs.push({bytes,pdf,name:f.name})-1;
       for(let i=1;i<=pdf.numPages;i++){const p=await pdf.getPage(i);pages.push({d,i,rot:0,nat:p.rotate||0,sel:false,ov:[]})}
     }catch(e){toast("تعذّر فتح الملف «"+f.name+"». تأكد أنه PDF سليم وغير مشفّر.")}
   }
-  render();
+  if(!window.__fit&&pages.length){window.__fit=1;await fitW()}else render();
+  if(had&&pages.length>had)toast("تم دمج الملف: أُضيفت "+(pages.length-had)+" صفحة في النهاية. رتّبها بالأسهم ثم نزّل.");
 }
+async function fitW(){const pg=pages[0];if(!pg){render();return}const p=await docs[pg.d].pdf.getPage(pg.i),v=p.getViewport({scale:1,rotation:(pg.nat+pg.rot)%360});zoom=Math.min(1.4,Math.max(.4,(innerWidth-28)/v.width));render()}
 $("file").onchange=e=>{load([...e.target.files]);e.target.value=""};
 function loadImgModule(){if(window.imgLoad)return;const s=document.createElement("script");s.textContent=$("imgmod").textContent;document.head.append(s)}
 const fimg=$("fimg");if(fimg)fimg.onchange=e=>{const fs=[...e.target.files];e.target.value="";try{loadImgModule();imgLoad(fs)}catch(err){toast("تعذّر تشغيل تحويل الصور: "+err.message)}};
@@ -213,21 +324,36 @@ async function render(){
       if(rot!==0)return toast("إضافة النص متاحة للصفحات غير المُدارة فقط.");
       const r=wrap.getBoundingClientRect();
       const o={x:(e.clientX-r.left)/r.width,y:(e.clientY-r.top)/r.height,t:"",f:def.f,c:def.c,s:def.s};
-      pg.ov.push(o);const el=mkOv(pg,o,dispScale,wrap);wrap.append(el);el.focus();
+      pg.ov.push(o);const el=mkOv(pg,o,dispScale,wrap);wrap.append(el);el.focus();addMode=false;$("txt").classList.remove("on");document.querySelectorAll(".wrap").forEach(w=>w.classList.remove("add"));
     };
     wrap._draw=()=>{page.render({canvasContext:cv.getContext("2d"),viewport:vp});if(rot===0)buildDet(wrap,pg,page,dispScale)};
     card.append(bar,wrap);frag.append(card);io.observe(wrap);
   }
-  main.replaceChildren(frag);scrollTo(0,sy);main.scrollLeft=sx;updateUI();track();
+  main.replaceChildren(frag);const pd=window.__pend;window.__pend=null;scrollTo(0,pd?pd.y:sy);main.scrollLeft=pd?pd.x:sx;updateUI();track();
 }
-function dock(el,tb){const r=el.getBoundingClientRect(),w=tb.offsetWidth,h=tb.offsetHeight,t0=document.querySelector("header").getBoundingClientRect().bottom+4;let y=r.top-h-6;if(y<t0)y=r.bottom+6;y=Math.max(t0,Math.min(y,innerHeight-h-6));tb.style.left=Math.min(Math.max(4,r.left),Math.max(4,innerWidth-w-4))+"px";tb.style.top=y+"px"}
+function dock(el,tb){const vv=window.visualViewport,vw=vv?vv.width:innerWidth,vh=vv?vv.height:innerHeight,ox=vv?vv.offsetLeft:0,oy=vv?vv.offsetTop:0,r=el.getBoundingClientRect(),w=tb.offsetWidth,h=tb.offsetHeight,t0=Math.max(oy+4,document.querySelector("header").getBoundingClientRect().bottom+4);let y=r.top-h-8;if(y<t0)y=r.bottom+8;y=Math.max(t0,Math.min(y,oy+vh-h-8));tb.style.left=Math.min(Math.max(ox+4,r.left),Math.max(ox+4,ox+vw-w-4))+"px";tb.style.top=y+"px"}
 const redock=()=>document.querySelectorAll(".ov.sel,.im.sel").forEach(x=>dock(x,x.querySelector(".tb")));
-addEventListener("scroll",redock,true);addEventListener("resize",redock);
+addEventListener("scroll",redock,true);addEventListener("resize",redock);if(window.visualViewport){visualViewport.addEventListener("resize",redock);visualViewport.addEventListener("scroll",redock)}
 function pick(el){document.querySelectorAll(".ov.sel,.im.sel").forEach(x=>{if(x!==el)x.classList.remove("sel")});el.classList.add("sel")}
-function dropSel(){cur=null;if(document.activeElement&&document.activeElement.blur)document.activeElement.blur();pages.forEach(p=>p.ov=p.ov.filter(o=>o.t.trim()||o.cover));document.querySelectorAll(".im.sel").forEach(x=>x.classList.remove("sel"));document.querySelectorAll(".ov").forEach(x=>{if(!x.querySelector(".t").innerText.trim())x.remove();else x.classList.remove("sel")})}
+function dropSel(){cur=null;if(document.activeElement&&document.activeElement.blur)document.activeElement.blur();pages.forEach(p=>p.ov=p.ov.filter(o=>o.t.trim()||o.cover));document.querySelectorAll(".im.sel").forEach(x=>x.classList.remove("sel"));document.querySelectorAll(".ov").forEach(x=>{if(!x.querySelector(".t").innerText.trim())x.remove();else{x.classList.remove("sel","edit");x.querySelector(".t").contentEditable="false"}})}
 addEventListener("pointerdown",e=>{const t=e.target;if(t.closest&&t.closest(".ov,.im,header,#toast"))return;dropSel()},true);
 function styleOv(el,o,k){el.style.fontFamily=FONTS[o.f][1]+",Arial,sans-serif";el.style.fontWeight=o.b?"700":"400";el.style.color=o.c;el.style.fontSize=o.s*k+"px"}
 function sampleBg(wrap,g,W,top,bh){try{const cv=wrap.querySelector("canvas"),k=cv.width/W,x=Math.max(0,Math.floor((g.l-3)*k)),y=Math.max(0,Math.floor(top*k)),w=Math.max(1,Math.min(cv.width-x,Math.ceil((g.r-g.l+6)*k))),h=Math.max(1,Math.min(cv.height-y,Math.ceil(bh*k))),d=cv.getContext("2d").getImageData(x,y,w,h).data,m={};let best=0,bk=null;for(let i=0;i<d.length;i+=4){const q=(d[i]>>4)+","+(d[i+1]>>4)+","+(d[i+2]>>4),e=m[q]||(m[q]={n:0,r:0,g:0,b:0});e.n++;e.r+=d[i];e.g+=d[i+1];e.b+=d[i+2];if(e.n>best){best=e.n;bk=e}}return"#"+[bk.r,bk.g,bk.b].map(v=>Math.round(v/bk.n).toString(16).padStart(2,"0")).join("")}catch(e){return"#ffffff"}}
+function inpaint(wrap,W,x0,y0,bw,bh,bg){try{
+  const cv=wrap.querySelector("canvas"),k=cv.width/W,X=Math.round(x0*k),Y=Math.round(y0*k),w=Math.max(2,Math.round(bw*k)),h=Math.max(2,Math.round(bh*k));
+  if(w*h>360000||X<4||Y<4||X+w+5>cv.width||Y+h+5>cv.height)return null;
+  const ctx=cv.getContext("2d"),B=[1,3,5].map(i=>parseInt(bg.slice(i,i+2),16));
+  const gl=ctx.getImageData(X-4,Y,3,h).data,gr=ctx.getImageData(X+w+1,Y,3,h).data,gt=ctx.getImageData(X,Y-4,w,3).data,gb=ctx.getImageData(X,Y+h+1,w,3).data;
+  const avg=(d,ix)=>{let r=0,g=0,b=0,n=0;for(const i of ix){const dd=Math.abs(d[i]-B[0])+Math.abs(d[i+1]-B[1])+Math.abs(d[i+2]-B[2]);if(dd<150){r+=d[i];g+=d[i+1];b+=d[i+2];n++}}return n?[r/n,g/n,b/n]:B};
+  const L=[],R=[],T=[],Bo=[];
+  for(let y=0;y<h;y++){const o=y*12;L.push(avg(gl,[o,o+4,o+8]));R.push(avg(gr,[o,o+4,o+8]))}
+  for(let x=0;x<w;x++){const ix=[x*4,(w+x)*4,(2*w+x)*4];T.push(avg(gt,ix));Bo.push(avg(gb,ix))}
+  const sm=a=>a.map((_,i)=>{let r=0,g=0,b=0,n=0;for(let j=Math.max(0,i-3);j<=Math.min(a.length-1,i+3);j++){r+=a[j][0];g+=a[j][1];b+=a[j][2];n++}return[r/n,g/n,b/n]});
+  const SL=sm(L),SR=sm(R),ST=sm(T),SB=sm(Bo),oc=document.createElement("canvas");oc.width=w;oc.height=h;
+  const og=oc.getContext("2d"),id=og.createImageData(w,h);
+  for(let y=0;y<h;y++){const v=y/(h-1);for(let x=0;x<w;x++){const u=x/(w-1),i=(y*w+x)*4;for(let c=0;c<3;c++){const hv=SL[y][c]*(1-u)+SR[y][c]*u,vv=ST[x][c]*(1-v)+SB[x][c]*v;id.data[i+c]=Math.round((hv+vv)/2)}id.data[i+3]=255}}
+  og.putImageData(id,0,0);return oc.toDataURL("image/png");
+}catch(e){return null}}
 function sampleC(wrap,g,W,top,bh,bg){try{const cv=wrap.querySelector("canvas"),k=cv.width/W,x=Math.max(0,Math.floor(g.l*k)),y=Math.max(0,Math.floor(top*k)),w=Math.max(1,Math.min(cv.width-x,Math.ceil((g.r-g.l)*k))),h=Math.max(1,Math.min(cv.height-y,Math.ceil(bh*k))),d=cv.getContext("2d").getImageData(x,y,w,h).data,B=[1,3,5].map(i=>parseInt(bg.slice(i,i+2),16));let best=-1,rgb=[0,0,0];for(let i=0;i<d.length;i+=4){const s=Math.abs(d[i]-B[0])+Math.abs(d[i+1]-B[1])+Math.abs(d[i+2]-B[2]);if(d[i+3]>0&&s>best){best=s;rgb=[d[i],d[i+1],d[i+2]]}}if(best<60)return"#000000";return"#"+rgb.map(v=>v.toString(16).padStart(2,"0")).join("")}catch(e){return"#000000"}}
 function isBold(page,fn){try{const f=page.commonObjs.get(fn);return !!(f&&(f.bold||f.black||/bold|black|heavy|demi/i.test(f.name||"")))}catch(e){return false}}
 const OF={};function origFont(fn,st){if(!fn)return 0;if(OF[fn]!=null)return OF[fn];FONTS.push(["الخط الأصلي "+(Object.keys(OF).length+1),'"'+fn+'",'+((st&&st.fontFamily)||"sans-serif")]);return OF[fn]=FONTS.length-1}
@@ -254,7 +380,7 @@ async function buildDet(wrap,pg,page,s){
       e.stopPropagation();
       let sz=Math.min(72,Math.max(8,Math.round(g.h)));
       if(g.fn===null){sz=Math.max(6,Math.round(g.h*.78));try{const cx=document.createElement("canvas").getContext("2d");cx.font=sz+"px "+FONTS[0][1]+",Arial,sans-serif";const mw=cx.measureText(text).width,bw=g.r-g.l;if(mw>bw*1.02)sz=Math.max(6,Math.floor(sz*bw/mw))}catch(e){}}
-      const bgc=sampleBg(wrap,g,W,top,bh),o={x:g.l/W,y:(g.b-.93*sz)/H,t:text,f:origFont(g.fn,tc.styles[g.fn]),c:sampleC(wrap,g,W,top,bh,bgc),b:isBold(page,g.fn),s:sz,key,cover:{x:(g.l-1)/W,y:(top-1)/H,w:(g.r-g.l+2)/W,h:(bh+2)/H,bg:bgc}};
+      const bgc=sampleBg(wrap,g,W,top,bh),o={x:g.l/W,y:(g.b-.93*sz)/H,t:text,f:origFont(g.fn,tc.styles[g.fn]),c:sampleC(wrap,g,W,top,bh,bgc),b:isBold(page,g.fn),s:sz,key,cover:{x:(g.l-1)/W,y:(top-1)/H,w:(g.r-g.l+2)/W,h:(bh+2)/H,bg:bgc,img:inpaint(wrap,W,g.l-1,top-1,g.r-g.l+2,bh+2,bgc)}};
       pg.ov.push(o);d.remove();
       const el=mkOv(pg,o,s,wrap);wrap.append(el);el.focus();
     };
@@ -262,36 +388,45 @@ async function buildDet(wrap,pg,page,s){
   });
 }
 function mkOv(pg,o,s,wrap){
-  if(o.cover){const c=document.createElement("div");c.className="cover";Object.assign(c.style,{left:o.cover.x*100+"%",top:o.cover.y*100+"%",width:o.cover.w*100+"%",height:o.cover.h*100+"%",background:o.cover.bg||"#fff"});wrap.append(c)}
-  const el=document.createElement("div"),t=document.createElement("span"),d=document.createElement("button");
-  const m=document.createElement("button");m.className="m";m.textContent="✥";m.title="اسحب لنقل النص";m.setAttribute("aria-label","نقل النص");
-  el.className="ov";t.className="t";t.contentEditable="true";t.dir="auto";t.textContent=o.t;t.setAttribute("aria-label","نص مضاف");
-  d.className="d";d.textContent="×";d.title="حذف النص";d.setAttribute("aria-label","حذف النص");
+  if(o.cover){const c=document.createElement("div");c.className="cover";Object.assign(c.style,{left:o.cover.x*100+"%",top:o.cover.y*100+"%",width:o.cover.w*100+"%",height:o.cover.h*100+"%",background:o.cover.img?"url("+o.cover.img+") 0 0/100% 100% no-repeat":(o.cover.bg||"#fff")});wrap.append(c)}
+  const el=document.createElement("div"),t=document.createElement("span"),rz=document.createElement("div"),tb=document.createElement("div");
+  el.className="ov";t.className="t";t.contentEditable="false";t.dir="auto";t.textContent=o.t;t.setAttribute("aria-label","نص مضاف");rz.className="rzt";tb.className="tb";
   el.style.left=o.x*100+"%";el.style.top=o.y*100+"%";styleOv(el,o,s);
-  const rm=()=>{if(o.cover){o.t="";t.textContent="";el.classList.remove("sel")}else{pg.ov=pg.ov.filter(v=>v!==o);el.remove()}};
+  const place=()=>dock(el,tb);
+  const rm=()=>{if(o.cover){o.t="";t.textContent="";el.classList.remove("sel","edit")}else{pg.ov=pg.ov.filter(v=>v!==o);el.remove()}};
+  const startEdit=()=>{t.contentEditable="true";el.classList.add("edit");pick(el);t.focus();try{const r=document.createRange();r.selectNodeContents(t);r.collapse(false);const sl=getSelection();sl.removeAllRanges();sl.addRange(r)}catch(e){}place()};
   t.oninput=()=>{o.t=t.innerText};
-  
-  d.onmousedown=e=>e.preventDefault();
-  d.onclick=rm;
-  const act=()=>{pick(el);cur={o,el,k:s};Object.assign(def,{f:o.f,c:o.c,s:o.s});place()};t.onfocus=act;el.addEventListener("pointerdown",act);
-  m.onpointerdown=e=>{e.preventDefault();m.setPointerCapture(e.pointerId);const r=wrap.getBoundingClientRect(),x0=o.x,y0=o.y,sx=e.clientX,sy=e.clientY;
-    m.onpointermove=ev=>{o.x=Math.min(.98,Math.max(0,x0+(ev.clientX-sx)/r.width));o.y=Math.min(.98,Math.max(0,y0+(ev.clientY-sy)/r.height));el.style.left=o.x*100+"%";el.style.top=o.y*100+"%";dock(el,tb)};
-    m.onpointerup=m.onpointercancel=()=>{m.onpointermove=null}};
-  const tb=document.createElement("div");tb.className="tb";
-  const sel=document.createElement("select");sel.setAttribute("aria-label","الخط");FONTS.forEach((f,i)=>sel.add(new Option(f[0],i)));sel.value=o.f;
-  const col=document.createElement("input");col.type="color";col.value=o.c;col.setAttribute("aria-label","لون النص");
-  const mb=document.createElement("button"),pb=document.createElement("button"),sz=document.createElement("span");const bb=document.createElement("button");bb.textContent="B";bb.style.fontWeight="700";bb.setAttribute("aria-label","خط عريض");bb.classList.toggle("on",!!o.b);bb.onclick=()=>{o.b=!o.b;bb.classList.toggle("on",o.b);upd()};
-  const nb=document.createElement("button");nb.textContent="١٢٣";nb.setAttribute("aria-label","تحويل الأرقام بين العربية واللاتينية");
-  nb.onclick=()=>{const L=/[0-9]/.test(o.t),D="٠١٢٣٤٥٦٧٨٩";o.t=o.t.replace(L?/[0-9]/g:/[٠-٩]/g,c=>L?D[c]:String(D.indexOf(c)));t.textContent=o.t;upd()};
-  mb.textContent="A−";pb.textContent="A+";sz.className="sz";sz.textContent=o.s;mb.setAttribute("aria-label","تصغير الخط");pb.setAttribute("aria-label","تكبير الخط");
-  const upd=()=>{Object.assign(def,{f:o.f,c:o.c,s:o.s});styleOv(el,o,s);sz.textContent=o.s;place()};
-  sel.onchange=()=>{o.f=+sel.value;upd()};
-  col.oninput=()=>{o.c=col.value;upd()};
-  mb.onclick=()=>{o.s=Math.max(8,o.s-2);upd()};
-  pb.onclick=()=>{o.s=Math.min(72,o.s+2);upd()};
+  const act=()=>{pick(el);cur={o,el,k:s};Object.assign(def,{f:o.f,c:o.c,s:o.s});place()};
+  t.onfocus=act;
+  const drag=(src,stopTap)=>e=>{
+    if(e.target.closest(".tb,.rzt"))return;
+    if(el.classList.contains("edit")&&src===el)return;
+    const was=el.classList.contains("sel");
+    e.preventDefault();act();
+    src.setPointerCapture(e.pointerId);
+    const r=wrap.getBoundingClientRect(),x0=o.x,y0=o.y,sx=e.clientX,sy=e.clientY;let moved=false;
+    src.onpointermove=ev=>{const dx=ev.clientX-sx,dy=ev.clientY-sy;if(!moved&&Math.hypot(dx,dy)<6)return;moved=true;o.x=Math.min(.98,Math.max(0,x0+dx/r.width));o.y=Math.min(.98,Math.max(0,y0+dy/r.height));el.style.left=o.x*100+"%";el.style.top=o.y*100+"%";place()};
+    src.onpointerup=src.onpointercancel=()=>{src.onpointermove=null;if(!moved&&was&&!stopTap)startEdit()};
+  };
+  el.addEventListener("pointerdown",drag(el,false));
+  rz.onpointerdown=e=>{e.preventDefault();e.stopPropagation();rz.setPointerCapture(e.pointerId);const w0=Math.max(20,el.getBoundingClientRect().width),s0=o.s,sx=e.clientX,sy=e.clientY;
+    rz.onpointermove=ev=>{const k=Math.max(.3,Math.min(6,(w0+(ev.clientX-sx)+(ev.clientY-sy)*.5)/w0));o.s=Math.max(6,Math.min(160,Math.round(s0*k)));Object.assign(def,{s:o.s});styleOv(el,o,s);szl.textContent=o.s;place()};
+    rz.onpointerup=rz.onpointercancel=()=>{rz.onpointermove=null}};
+  const mkB=(txt,label,fn,cls)=>{const b=document.createElement("button");b.textContent=txt;b.setAttribute("aria-label",label);b.title=label;b.onclick=fn;if(cls)b.className=cls;return b};
+  const szl=document.createElement("span");szl.className="sz";szl.textContent=o.s;
+  const upd=()=>{Object.assign(def,{f:o.f,c:o.c,s:o.s});styleOv(el,o,s);szl.textContent=o.s;place()};
+  const mv=mkB("✥","اسحب لنقل النص",()=>{},"m");mv.onpointerdown=drag(mv,true);
+  const bb=mkB("B","خط عريض",()=>{o.b=!o.b;bb.classList.toggle("on",o.b);upd()});bb.style.fontWeight="700";bb.classList.toggle("on",!!o.b);
+  const nb=mkB("١٢٣","تحويل الأرقام بين العربية واللاتينية",()=>{const L=/[0-9]/.test(o.t),D="٠١٢٣٤٥٦٧٨٩";o.t=o.t.replace(L?/[0-9]/g:/[٠-٩]/g,c=>L?D[c]:String(D.indexOf(c)));t.textContent=o.t;upd()});
+  const mb=mkB("A−","تصغير الخط",()=>{o.s=Math.max(6,o.s-2);upd()}),pb=mkB("A+","تكبير الخط",()=>{o.s=Math.min(160,o.s+2);upd()});
+  const ed=mkB("✎","تعديل النص",startEdit),d=mkB("×","حذف النص",rm,"d");
+  const sel=document.createElement("select");sel.setAttribute("aria-label","الخط");fontOpts(sel,o.f);sel.onchange=()=>{o.f=+sel.value;upd()};
+  const col=document.createElement("input");col.type="color";col.value=o.c;col.setAttribute("aria-label","لون النص");col.oninput=()=>{o.c=col.value;upd()};
+  const sw=["#000000","#ffffff","#c62828","#1565c0","#2e7d32","#6d4c41"].map(c=>{const b=mkB("","لون "+c,()=>{o.c=c;col.value=c;upd()},"sw");b.style.background=c;return b});
+  const r1=document.createElement("div"),r2=document.createElement("div");r1.className="r1";r2.className="r2";
+  r1.append(mv,ed,bb,nb,mb,szl,pb,d);r2.append(sel,col,...sw);tb.append(r1,r2);
   tb.onpointerdown=e=>{if(!/SELECT|INPUT/.test(e.target.tagName))e.preventDefault()};
-  function place(){dock(el,tb)}
-  tb.append(m,sel,col,bb,nb,mb,sz,pb,d);el.append(t,tb);el.focus=()=>t.focus();
+  el.append(t,rz,tb);el.startEdit=startEdit;el.focus=startEdit;
   return el;
 }
 function updateUI(){
@@ -300,8 +435,16 @@ function updateUI(){
   $("save").disabled=!n;$("svl").textContent=s?"تنزيل المحدد ("+s+")":"تنزيل";
   $("zv").textContent=Math.round(zoom*100)+"%";
 }
-$("zi").onclick=()=>{zoom=Math.min(2.5,zoom+.25);render()};
-$("zo").onclick=()=>{zoom=Math.max(.5,zoom-.25);render()};
+const zoomTo=z=>{const old=zoom;zoom=Math.min(3,Math.max(.4,z));if(zoom===old)return;const r=zoom/old,m=$("main"),H=m.offsetTop+16,cx=innerWidth/2,cy=innerHeight/2;window.__pend={x:(m.scrollLeft+cx)*r-cx,y:H+(scrollY+cy-H)*r-cy};render()};
+$("zi").onclick=()=>zoomTo(zoom*1.2);$("zo").onclick=()=>zoomTo(zoom/1.2);$("zv").onclick=()=>fitW();$("zv").title="اضغط لملاءمة عرض الصفحة";
+(function(){const m=$("main");let pz=null;
+const dist=t=>Math.hypot(t[0].clientX-t[1].clientX,t[0].clientY-t[1].clientY);
+m.addEventListener("touchstart",e=>{if(e.touches.length===2){const t=e.touches,cx=(t[0].clientX+t[1].clientX)/2,cy=(t[0].clientY+t[1].clientY)/2,r=m.getBoundingClientRect();pz={d:dist(t),k:1,cx,cy,z:zoom,sx:m.scrollLeft,sy:scrollY};m.style.transformOrigin=(cx-r.left)+"px "+(cy-r.top)+"px";m.style.willChange="transform"}},{passive:true});
+m.addEventListener("touchmove",e=>{if(!pz||e.touches.length!==2)return;e.preventDefault();pz.k=Math.min(3/pz.z,Math.max(.4/pz.z,dist(e.touches)/pz.d));m.style.transform="scale("+pz.k+")"},{passive:false});
+const end=()=>{if(!pz)return;const p=pz;pz=null;m.style.transform="";m.style.transformOrigin="";m.style.willChange="";if(Math.abs(p.k-1)<.03)return;const old=zoom;zoom=Math.min(3,Math.max(.4,p.z*p.k));const r=zoom/old,H=m.offsetTop+16;window.__pend={x:(p.sx+p.cx)*r-p.cx,y:H+(p.sy+p.cy-H)*r-p.cy};render()};
+m.addEventListener("touchend",e=>{if(e.touches.length<2)end()});m.addEventListener("touchcancel",end);
+addEventListener("wheel",e=>{if(e.ctrlKey&&e.target.closest&&e.target.closest("main")){e.preventDefault();zoomTo(zoom*(e.deltaY<0?1.1:1/1.1))}},{passive:false});
+})();
 function mkIm(pg,im,wrap){
   const el=document.createElement("div"),img=document.createElement("img"),rz=document.createElement("div"),tb=document.createElement("div");
   el.className="im";img.src=im.u;img.alt="";rz.className="rz";tb.className="tb";
@@ -384,29 +527,75 @@ async function textPng(txt,o){
   const blob=await new Promise(r=>c.toBlob(r,"image/png"));
   return {data:new Uint8Array(await blob.arrayBuffer()),w:c.width/K,h:c.height/K};
 }
-$("save").onclick=async()=>{
-  const {PDFDocument,StandardFonts,degrees,rgb}=PDFLib;
-  const sel=pages.filter(p=>p.sel),list=sel.length?sel:pages;
-  try{
-    const out=await PDFDocument.create(),cache={};
-    for(const pg of list){
-      cache[pg.d]??=await PDFDocument.load(docs[pg.d].bytes,{ignoreEncryption:true});
-      const [cp]=await out.copyPages(cache[pg.d],[pg.i-1]);
-      cp.setRotation(degrees((pg.nat+pg.rot)%360));out.addPage(cp);
-      const {width:w,height:h}=cp.getSize();
-      for(const o of pg.ov){if(!o.cover)continue;const c=o.cover;cp.drawRectangle({x:c.x*w,y:h-(c.y+c.h)*h,width:c.w*w,height:c.h*h,color:rgb(...[1,3,5].map(i=>parseInt((c.bg||"#ffffff").slice(i,i+2),16)/255)),borderWidth:0})}
-      for(const im of pg.img||[]){const e=im.m==="image/png"?await out.embedPng(im.b):await out.embedJpg(im.b),ww=im.w*w,hh=ww*im.r;cp.drawImage(e,{x:im.x*w,y:h-im.y*h-hh,width:ww,height:hh})}
-      for(const o of pg.ov){
-        if(!o.t.trim())continue;
-        const im=await textPng(o.t,o),img=await out.embedPng(im.data);
-        cp.drawImage(img,{x:o.x*w,y:h-o.y*h-im.h,width:im.w,height:im.h});
-      }
+async function saveFile(name,bytes,mime){const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([bytes],{type:mime||"application/pdf"}));a.download=name;document.body.append(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},1500)}
+const WM={t:"",op:.18},META={title:"",author:""};
+async function buildPdf(list){
+  const {PDFDocument,degrees,rgb}=PDFLib;
+  const out=await PDFDocument.create(),cache={};let wmI=null,wmE=null;
+  for(const pg of list){
+    cache[pg.d]??=await PDFDocument.load(docs[pg.d].bytes,{ignoreEncryption:true});
+    const [cp]=await out.copyPages(cache[pg.d],[pg.i-1]);
+    cp.setRotation(degrees((pg.nat+pg.rot)%360));out.addPage(cp);
+    const {width:w,height:h}=cp.getSize();
+    for(const o of pg.ov){if(!o.cover)continue;const c=o.cover;
+      if(c.img){try{const ie=await out.embedPng(Uint8Array.from(atob(c.img.split(",")[1]),x=>x.charCodeAt(0)));cp.drawImage(ie,{x:c.x*w,y:h-(c.y+c.h)*h,width:c.w*w,height:c.h*h});continue}catch(e){}}
+      cp.drawRectangle({x:c.x*w,y:h-(c.y+c.h)*h,width:c.w*w,height:c.h*h,color:rgb(...[1,3,5].map(i=>parseInt((c.bg||"#ffffff").slice(i,i+2),16)/255)),borderWidth:0})}
+    for(const im of pg.img||[]){const e=im.m==="image/png"?await out.embedPng(im.b):await out.embedJpg(im.b),ww=im.w*w,hh=ww*im.r;cp.drawImage(e,{x:im.x*w,y:h-im.y*h-hh,width:ww,height:hh})}
+    for(const o of pg.ov){
+      if(!o.t.trim())continue;
+      const im=await textPng(o.t,o),img=await out.embedPng(im.data);
+      cp.drawImage(img,{x:o.x*w,y:h-o.y*h-im.h,width:im.w,height:im.h});
     }
-    const bytes=await out.save();
-    const fname=(($("fn").value.trim().replace(/[\\/:*?"<>|]+/g,"-").replace(/\.pdf$/i,""))||"document")+".pdf";
-    const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([bytes],{type:"application/pdf"}));a.download=fname;document.body.append(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},1500);
-  }catch(e){if(e&&e.code==="declined")return;toast("تعذّر إنشاء الملف.")}
+    if(WM.t){wmI??=await textPng(WM.t,{s:Math.max(24,Math.round(Math.min(w,h)/7)),f:0,c:"#808080",b:true});wmE??=await out.embedPng(wmI.data);const cs=Math.SQRT1_2,sn=Math.SQRT1_2;cp.drawImage(wmE,{x:w/2-(wmI.w/2*cs-wmI.h/2*sn),y:h/2-(wmI.w/2*sn+wmI.h/2*cs),width:wmI.w,height:wmI.h,rotate:degrees(45),opacity:WM.op})}
+  }
+  if(META.title)out.setTitle(META.title);if(META.author)out.setAuthor(META.author);out.setCreator("الفلقي لتعديل PDF");out.setProducer("الفلقي لتعديل PDF");
+  return await out.save();
+}
+const safeName=()=>(($("fn").value.trim().replace(/[\\/:*?"<>|]+/g,"-").replace(/\.pdf$/i,""))||"document");
+$("save").onclick=async()=>{
+  const sel=pages.filter(p=>p.sel),list=sel.length?sel:pages;
+  try{toast("جارٍ تجهيز الملف…");const bytes=await buildPdf(list);await saveFile(safeName()+".pdf",bytes);$("toast").style.display="none"}
+  catch(e){if(e&&e.code==="declined")return;console.error(e);toast("تعذّر إنشاء الملف: "+((e&&e.message)||e))}
 };
+function jszipLoad(){if(window.JSZip)return Promise.resolve();return new Promise((res,rej)=>{const s=document.createElement("script");s.src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js";s.onload=res;s.onerror=()=>rej(new Error("تعذّر تحميل مكتبة الضغط"));document.head.append(s)})}
+$("spl").onclick=()=>{if(!pages.length)return toast("افتح ملف PDF أولًا.");const n=pages.filter(p=>p.sel).length;$("spinfo").textContent=n?"سيُقسَّم المحدد فقط ("+n+" صفحة).":"سيُقسَّم الملف كله ("+pages.length+" صفحة). حدّد صفحات بالمربعات لتقسيمها وحدها.";$("spm").classList.add("on")};
+$("spx").onclick=()=>$("spm").classList.remove("on");
+$("spok").onclick=async()=>{
+  const sel=pages.filter(p=>p.sel),list=sel.length?sel:pages,n=list.length,mode=document.querySelector("input[name=spmode]:checked").value;
+  let groups=[];
+  if(mode==="each")groups=list.map((_,i)=>[i]);
+  else if(mode==="every"){const k=Math.max(1,parseInt($("spn").value)||1);for(let i=0;i<n;i+=k)groups.push(list.slice(i,i+k).map((_,j)=>i+j))}
+  else{
+    for(const part of $("spr").value.split(/[,،;\s]+/).filter(Boolean)){const m=part.match(/^(\d+)(?:-(\d+))?$/);if(!m)return toast("نطاق غير صحيح: «"+part+"». مثال: 1-3, 5, 7-9");const a=+m[1],b=+(m[2]||m[1]);if(a<1||b>n||a>b)return toast("النطاق «"+part+"» خارج عدد الصفحات (1 إلى "+n+").");groups.push(Array.from({length:b-a+1},(_,i)=>a-1+i))}
+    if(!groups.length)return toast("اكتب النطاقات أولًا.");
+  }
+  try{
+    toast("جارٍ التقسيم…");
+    const base=safeName(),pad=String(groups.length).length,files=[];
+    for(let g=0;g<groups.length;g++)files.push({name:base+"-"+String(g+1).padStart(pad,"0")+".pdf",bytes:await buildPdf(groups[g].map(i=>list[i]))});
+    $("spm").classList.remove("on");
+    if(files.length===1){await saveFile(files[0].name,files[0].bytes);return}
+    await jszipLoad();const z=new JSZip();files.forEach(f=>z.file(f.name,f.bytes));
+    const zb=await z.generateAsync({type:"uint8array"});await saveFile(base+"-split.zip",zb,"application/zip");
+    toast("تم تقسيم الملف إلى "+files.length+" ملفات داخل ZIP.");
+  }catch(e){console.error(e);toast("تعذّر التقسيم: "+((e&&e.message)||e))}
+};
+// ===== دمج الملفات =====
+let mord=[];
+const docOrder=()=>{const o=[];pages.forEach(p=>{if(!o.includes(p.d))o.push(p.d)});return o};
+function drawMerge(){const box=$("mglist");box.innerHTML="";mord.forEach((d,i)=>{const cnt=pages.filter(p=>p.d===d).length,row=document.createElement("div");row.className="mrow";const nm=document.createElement("span");nm.textContent=(i+1)+". "+(docs[d].name||("ملف "+(d+1)))+" — "+cnt+" صفحة";const mk=(t,fn)=>{const b=document.createElement("button");b.textContent=t;b.onclick=fn;return b};row.append(nm,mk("↑",()=>{if(i>0){[mord[i-1],mord[i]]=[mord[i],mord[i-1]];drawMerge()}}),mk("↓",()=>{if(i<mord.length-1){[mord[i+1],mord[i]]=[mord[i],mord[i+1]];drawMerge()}}),mk("×",()=>{mord.splice(i,1);drawMerge()}));box.append(row)})}
+$("mrg").onclick=()=>{if(!pages.length)return toast("افتح ملفين أو أكثر من زر «فتح» ثم رتّبها هنا.");mord=docOrder();drawMerge();$("mgm").classList.add("on")};
+$("mgx").onclick=()=>$("mgm").classList.remove("on");
+$("mgok").onclick=()=>{const by={};pages.forEach(p=>(by[p.d]??=[]).push(p));pages=mord.flatMap(d=>by[d]||[]);$("mgm").classList.remove("on");render();toast("تم ترتيب الملفات. اضغط «تنزيل» للحصول على ملف واحد مدموج.")};
+// ===== أدوات إضافية =====
+$("tls").onclick=()=>{if(!pages.length)return toast("افتح ملف PDF أولًا.");$("wmt").value=WM.t;$("wmo").value=String(WM.op.toFixed(2));$("mti").value=META.title;$("mau").value=META.author;$("qsel").textContent=pages.every(p=>p.sel)?"إلغاء التحديد":"تحديد الكل";$("tlm").classList.add("on")};
+$("tlx").onclick=()=>$("tlm").classList.remove("on");
+$("tlok").onclick=()=>{WM.t=$("wmt").value.trim();WM.op=parseFloat($("wmo").value)||.18;META.title=$("mti").value.trim();META.author=$("mau").value.trim();$("tlm").classList.remove("on");toast(WM.t?"سيُضاف «"+WM.t+"» كعلامة مائية عند التنزيل.":"تم حفظ الإعدادات.")};
+$("qrot").onclick=()=>{let sk=0;pages.forEach(p=>{if(p.ov.length||(p.img||[]).length)sk++;else p.rot=(p.rot+90)%360});$("tlm").classList.remove("on");render();if(sk)toast("تخطّيت "+sk+" صفحة فيها نص أو صور مضافة.")};
+$("qrev").onclick=()=>{pages=pages.slice().reverse();$("tlm").classList.remove("on");render()};
+$("qsel").onclick=()=>{const all=pages.every(p=>p.sel);pages.forEach(p=>p.sel=!all);$("tlm").classList.remove("on");render()};
+$("qdel").onclick=()=>{const n=pages.filter(p=>p.sel).length;if(!n)return toast("حدّد صفحات بالمربعات أولًا.");pages=pages.filter(p=>!p.sel);$("tlm").classList.remove("on");render();toast("تم حذف "+n+" صفحة. يمكنك التراجع.")};
+
 render();
 </script>
 </body>
