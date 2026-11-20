@@ -100,7 +100,19 @@ main{touch-action:pan-x pan-y}
 .im .rzx{right:-11px;top:50%;margin-top:-16px;width:20px;height:32px;border-radius:10px;cursor:ew-resize}.im .rzy{bottom:-11px;left:50%;margin-left:-16px;width:32px;height:20px;border-radius:10px;cursor:ns-resize}
 .im.sel .rzx,.im.sel .rzy{display:block}
 @media (pointer:coarse){.ov .rzt{width:26px;height:26px;right:-28px;bottom:-28px}.im .rzx{width:26px;height:44px;margin-top:-22px;right:-14px}.im .rzy{height:26px;width:44px;margin-left:-22px;bottom:-14px}.ov .tb button,.ov .tb select,.ov .tb input{height:42px}}
-#toast{position:fixed;bottom:calc(16px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);background:var(--ink);color:var(--panel);padding:10px 16px;border-radius:8px;display:none;z-index:20;max-width:90%}
+#bcm,#rdm,#hlp{position:fixed;inset:0;z-index:15;background:rgba(0,0,0,.55);display:none;align-items:center;justify-content:center;padding:16px}#bcm.on,#rdm.on,#hlp.on{display:flex}
+#bcm .bx,#rdm .bx,#hlp .bx{background:var(--panel);border-radius:18px;padding:16px;width:min(100%,480px);max-height:88vh;overflow:auto;box-shadow:0 12px 40px rgba(0,0,0,.35)}
+#bcm h2,#rdm h2,#hlp h2{margin:0 0 6px;font-size:1.1rem}#rdm p{margin:0 0 10px;color:var(--mut);font-size:.9rem;word-break:break-all}
+#bcm .r,#hlp .r{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:12px}
+#bcm select,#bcm input[type=text]{width:100%;height:40px;border:1px solid var(--line);border-radius:8px;padding:0 10px;font:inherit;background:var(--bg);color:var(--ink)}
+.bco{display:flex;flex-wrap:wrap;gap:10px;align-items:center}.bco label{display:flex;gap:6px;align-items:center;font-size:.9rem}.bco select{width:auto}
+.bcp{display:flex;justify-content:center;align-items:center;min-height:120px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:8px;margin-top:10px;color:#555;font-size:.9rem;text-align:center}
+.rdb{display:flex;flex-direction:column;gap:8px}.rdb button,.rdb .rda{height:48px;display:flex;align-items:center;justify-content:center;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);text-decoration:none;font:inherit;font-weight:600}.rdb .p{background:var(--acc);color:var(--accfg);border-color:var(--acc)}
+.hl{margin:6px 0;padding-inline-start:18px;line-height:1.9;font-size:.92rem}
+#anp{position:fixed;left:8px;right:8px;bottom:calc(8px + env(safe-area-inset-bottom,0px));z-index:9;display:none;gap:6px;align-items:center;justify-content:center;flex-wrap:wrap;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:8px;box-shadow:0 4px 18px rgba(0,0,0,.3)}body.ann #anp{display:flex}#anp button,#anp select,#anp input{height:40px;border-radius:8px}#anp input[type=color]{width:46px;padding:2px}
+body.ann .wrap{touch-action:none;cursor:crosshair}body.ann .det{display:none}
+#toast{position:fixed
+.hb .q{display:none}@media (max-width:860px){.hb .q{display:inline}};bottom:calc(16px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);background:var(--ink);color:var(--panel);padding:10px 16px;border-radius:8px;display:none;z-index:20;max-width:90%}
 </style>
 </head>
 <body>
@@ -114,6 +126,9 @@ main{touch-action:pan-x pan-y}
    <button class="hb" id="edt" title="تعديل النص الموجود"><svg class="ic" viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg><span class="lb">تعديل النص</span></button>
    <label class="btn hb" title="إضافة صورة"><svg class="ic" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></svg><span class="lb">صورة</span><input id="img" type="file" accept="image/png,image/jpeg" hidden></label>
    <button class="hb" id="sig" title="توقيع"><svg class="ic" viewBox="0 0 24 24"><path d="M3 17c3 0 4-8 7-8s1 8 4 8 3-4 7-4"/></svg><span class="lb">توقيع</span></button>
+   <button class="hb" id="bcb" title="إضافة باركود / QR"><svg class="ic" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h3v3h-3zM20 14v3M14 20h3M20 20h1"/></svg><span class="lb">باركود</span></button>
+   <button class="hb" id="ann" title="تعليقات: تظليل، قلم، حجب"><svg class="ic" viewBox="0 0 24 24"><path d="m9 11-6 6v3h9l3-3"/><path d="m22 12-4.6 4.6a2 2 0 0 1-2.8 0l-5.2-5.2a2 2 0 0 1 0-2.8L14 4"/></svg><span class="lb">تعليق</span></button>
+   <button class="hb" id="hlpb" title="دليل الاستخدام"><span class="lb">؟</span><span class="q">؟</span></button>
    <button class="hb" id="pn" title="ترقيم الصفحات بأرقام عربية"><svg class="ic" viewBox="0 0 24 24"><path d="M4 9h16M4 15h16M10 3 8 21M16 3l-2 18"/></svg><span class="lb">ترقيم</span></button>
    <button class="hb" id="spl" title="تقسيم الملف"><svg class="ic" viewBox="0 0 24 24"><circle cx="6" cy="6" r="3"/><path d="M8.1 8.1 12 12"/><path d="M20 4 8.1 15.9"/><circle cx="6" cy="18" r="3"/><path d="M14.8 14.8 20 20"/></svg><span class="lb">تقسيم</span></button>
    <button class="hb" id="mrg" title="دمج الملفات وترتيبها"><svg class="ic" viewBox="0 0 24 24"><path d="M6 4v6a4 4 0 0 0 4 4h8M18 4v6a4 4 0 0 1-4 4"/><path d="m15 11 3 3-3 3"/></svg><span class="lb">دمج</span></button>
@@ -137,9 +152,20 @@ main{touch-action:pan-x pan-y}
 <div class="tsec"><h3>علامة مائية (تُضاف عند التنزيل على كل الصفحات)</h3><input id="wmt" type="text" dir="auto" placeholder="مثال: سري / مسودة / اسم الجهة"><div class="r"><label>الشفافية <select id="wmo"><option value="0.10">خفيفة</option><option value="0.18" selected>متوسطة</option><option value="0.30">واضحة</option></select></label></div></div>
 <div class="tsec"><h3>خصائص الملف</h3><input id="mti" type="text" dir="auto" placeholder="العنوان"><div style="height:6px"></div><input id="mau" type="text" dir="auto" placeholder="المؤلف"></div>
 <div class="tsec"><h3>عمليات سريعة</h3><div class="qa"><button id="qrot">تدوير الكل</button><button id="qrev">عكس الترتيب</button><button id="qsel">تحديد الكل</button><button id="qdel">حذف المحدد</button></div></div>
+<div class="tsec"><h3>إضافة سريعة</h3><div class="qa"><button id="qdh">تاريخ اليوم (هجري)</button><button id="qdg">تاريخ اليوم (ميلادي)</button></div></div>
+<div class="tsec"><h3>المشروع (لمتابعة العمل لاحقًا)</h3><div class="qa"><button id="prs">حفظ المشروع</button><label class="btn" for="pro">فتح مشروع</label><input id="pro" type="file" accept=".afq,application/json" hidden></div></div>
 <div class="tsec"><h3>قراءة نص الصور (تحتاج إنترنت وتعمل خارج تطبيق Claude)</h3><div class="r" style="margin-top:0"><select id="ocl"><option value="ara">عربي</option><option value="eng">English</option><option value="ara+eng">عربي + English</option></select><button id="ocg">حلّل صفحات الصور</button></div></div>
 <div class="r"><button id="tlx">إغلاق</button><span class="sp"></span><button id="tlok" class="p">حفظ الإعدادات</button></div></div></div>
-<div id="sg"><div class="bx" role="dialog" aria-label="التوقيع"><h2>ارسم توقيعك</h2><p>ارسم بإصبعك أو بالفأرة داخل المربع الأبيض.</p><canvas id="sgc"></canvas><div class="r"><input id="sgcol" type="color" value="#111111" aria-label="لون التوقيع"><button id="sgx">مسح</button><span class="sp"></span><button id="sgn">إلغاء</button><button id="sgok" class="p">إدراج</button></div></div></div>
+<div id="bcm"><div class="bx" role="dialog" aria-label="باركود"><h2>إضافة باركود / QR</h2>
+<div class="tsec"><select id="bct"><option value="qr">رمز QR (رابط أو نص، يدعم العربية)</option><option value="c128">باركود Code128 (أرقام وإنجليزي)</option></select></div>
+<div class="tsec"><input id="bcv" type="text" dir="auto" placeholder="الرابط أو النص أو الرقم"></div>
+<div class="tsec bco"><label id="bcll">تصحيح الأخطاء <select id="bcl"><option value="M">متوسط</option><option value="L">منخفض</option><option value="Q">عالٍ</option><option value="H">أعلى</option></select></label><label id="bctxl" style="display:none"><input id="bctx" type="checkbox" checked> أظهر النص تحت الباركود</label><label>اللون <input id="bcc" type="color" value="#000000"></label><label>المكان <select id="bcw"><option value="cur">الصفحة الظاهرة</option><option value="all">كل الصفحات (أسفل اليمين)</option></select></label></div>
+<div id="bcp" class="bcp"></div>
+<div class="r"><button id="bcx">إلغاء</button><span class="sp"></span><button id="bcok" class="p">إدراج</button></div></div></div>
+<div id="rdm"><div class="bx" role="dialog" aria-label="الملف جاهز"><h2>الملف جاهز ✔</h2><p id="rdn"></p><div class="rdb"><button id="rds" class="p">مشاركة / حفظ في «الملفات»</button><a id="rdd" class="rda p" href="#" download>تنزيل الملف</a><a id="rdo" class="rda" href="#" target="_blank" rel="noopener">فتح الملف</a><button id="rdx">إغلاق</button></div></div></div>
+<div id="hlp"><div class="bx" role="dialog" aria-label="دليل الاستخدام"><h2>دليل سريع</h2><ul class="hl"><li><b>فتح:</b> ملف PDF واحد أو عدة ملفات تُدمج. <b>صورة:</b> تحويل الصور إلى PDF بحجم الصفحة الذي تختاره.</li><li><b>تعديل النص:</b> فعّله ثم اضغط أي سطر في الملف. الضغط على النص المضاف يحدّده، والسحب يحرّكه، والضغط مرة ثانية يفتح الكتابة. الضغط بعيدًا ينهي التعديل.</li><li><b>شريط النص:</b> ✥ للنقل، A−/A+ للحجم، B للعريض، «Aa» للخطوط والألوان وتكرار النص ونسخه.</li><li><b>تعليق:</b> تظليل، قلم، وحجب (مربع أسود يخفي ما تحته في الملف المنزَّل).</li><li><b>باركود:</b> رمز QR أو Code128 على الصفحة أو على كل الصفحات.</li><li><b>دمج / تقسيم / أدوات:</b> ترتيب الملفات، التقسيم بالنطاق، علامة مائية، خصائص الملف.</li><li><b>القرص بإصبعين:</b> يكبّر الملف فقط. <b>تراجع / إعادة:</b> من الشريط العلوي أو Ctrl+Z / Ctrl+Y.</li><li>كل المعالجة داخل متصفحك، ولا تُرفع ملفاتك لأي مكان.</li></ul><div class="r"><span class="sp"></span><button id="hlx" class="p">حسنًا</button></div></div></div>
+<div id="anp"><button id="ah" class="on">تظليل</button><button id="ap">قلم</button><button id="ab">حجب</button><input id="ac" type="color" value="#ffd400" aria-label="اللون"><select id="aw" aria-label="السماكة"><option value="2">رفيع</option><option value="4" selected>متوسط</option><option value="8">عريض</option></select><button id="aq" class="p">تم</button></div>
+<div id="sg"><div class="bx" role="dialog" aria-label="التوقيع"><h2>ارسم توقيعك</h2><p>ارسم بإصبعك أو بالفأرة داخل المربع الأبيض.</p><canvas id="sgc"></canvas><div class="r"><input id="sgcol" type="color" value="#111111" aria-label="لون التوقيع"><button id="sgsv" style="display:none">استخدام المحفوظ</button><button id="sgx">مسح</button><span class="sp"></span><button id="sgn">إلغاء</button><button id="sgok" class="p">إدراج</button></div></div></div>
 <div id="toast"></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
@@ -231,6 +257,1294 @@ window.imgOcr=async function(pg,lang){
 };
 })();
 </script>
+<script type="text/plain" id="bcmod">
+/* QRCode for JavaScript (c) 2009 Kazuhiko Arase, MIT license - http://www.d-project.com/ */
+(function(){var M={};function def(n,f){M[n]={f:f,e:null}}function req(n){n=n.replace("./","");var m=M[n];if(!m.e){m.e={exports:{}};m.f(m.e,m.e.exports,req)}return m.e.exports}
+def("QRMode",function(module,exports,require){
+module.exports = {
+    MODE_NUMBER :       1 << 0,
+    MODE_ALPHA_NUM :    1 << 1,
+    MODE_8BIT_BYTE :    1 << 2,
+    MODE_KANJI :        1 << 3
+};
+
+});
+def("QRErrorCorrectLevel",function(module,exports,require){
+module.exports = {
+	L : 1,
+	M : 0,
+	Q : 3,
+	H : 2
+};
+
+
+});
+def("QRMaskPattern",function(module,exports,require){
+module.exports = {
+	PATTERN000 : 0,
+	PATTERN001 : 1,
+	PATTERN010 : 2,
+	PATTERN011 : 3,
+	PATTERN100 : 4,
+	PATTERN101 : 5,
+	PATTERN110 : 6,
+	PATTERN111 : 7
+};
+
+});
+def("QRMath",function(module,exports,require){
+var QRMath = {
+
+	glog : function(n) {
+	
+		if (n < 1) {
+			throw new Error("glog(" + n + ")");
+		}
+		
+		return QRMath.LOG_TABLE[n];
+	},
+	
+	gexp : function(n) {
+	
+		while (n < 0) {
+			n += 255;
+		}
+	
+		while (n >= 256) {
+			n -= 255;
+		}
+	
+		return QRMath.EXP_TABLE[n];
+	},
+	
+	EXP_TABLE : new Array(256),
+	
+	LOG_TABLE : new Array(256)
+
+};
+	
+for (var i = 0; i < 8; i++) {
+	QRMath.EXP_TABLE[i] = 1 << i;
+}
+for (var i = 8; i < 256; i++) {
+	QRMath.EXP_TABLE[i] = QRMath.EXP_TABLE[i - 4]
+		^ QRMath.EXP_TABLE[i - 5]
+		^ QRMath.EXP_TABLE[i - 6]
+		^ QRMath.EXP_TABLE[i - 8];
+}
+for (var i = 0; i < 255; i++) {
+	QRMath.LOG_TABLE[QRMath.EXP_TABLE[i] ] = i;
+}
+
+module.exports = QRMath;
+
+});
+def("QRPolynomial",function(module,exports,require){
+var QRMath = require('./QRMath');
+
+function QRPolynomial(num, shift) {
+	if (num.length === undefined) {
+		throw new Error(num.length + "/" + shift);
+	}
+
+	var offset = 0;
+
+	while (offset < num.length && num[offset] === 0) {
+		offset++;
+	}
+
+	this.num = new Array(num.length - offset + shift);
+	for (var i = 0; i < num.length - offset; i++) {
+		this.num[i] = num[i + offset];
+	}
+}
+
+QRPolynomial.prototype = {
+
+	get : function(index) {
+		return this.num[index];
+	},
+	
+	getLength : function() {
+		return this.num.length;
+	},
+	
+	multiply : function(e) {
+	
+		var num = new Array(this.getLength() + e.getLength() - 1);
+	
+		for (var i = 0; i < this.getLength(); i++) {
+			for (var j = 0; j < e.getLength(); j++) {
+				num[i + j] ^= QRMath.gexp(QRMath.glog(this.get(i) ) + QRMath.glog(e.get(j) ) );
+			}
+		}
+	
+		return new QRPolynomial(num, 0);
+	},
+	
+	mod : function(e) {
+	
+		if (this.getLength() - e.getLength() < 0) {
+			return this;
+		}
+	
+		var ratio = QRMath.glog(this.get(0) ) - QRMath.glog(e.get(0) );
+	
+		var num = new Array(this.getLength() );
+		
+		for (var i = 0; i < this.getLength(); i++) {
+			num[i] = this.get(i);
+		}
+		
+		for (var x = 0; x < e.getLength(); x++) {
+			num[x] ^= QRMath.gexp(QRMath.glog(e.get(x) ) + ratio);
+		}
+	
+		// recursive call
+		return new QRPolynomial(num, 0).mod(e);
+	}
+};
+
+module.exports = QRPolynomial;
+
+});
+def("QRRSBlock",function(module,exports,require){
+var QRErrorCorrectLevel = require('./QRErrorCorrectLevel');
+
+function QRRSBlock(totalCount, dataCount) {
+	this.totalCount = totalCount;
+	this.dataCount  = dataCount;
+}
+
+QRRSBlock.RS_BLOCK_TABLE = [
+
+	// L
+	// M
+	// Q
+	// H
+
+	// 1
+	[1, 26, 19],
+	[1, 26, 16],
+	[1, 26, 13],
+	[1, 26, 9],
+	
+	// 2
+	[1, 44, 34],
+	[1, 44, 28],
+	[1, 44, 22],
+	[1, 44, 16],
+
+	// 3
+	[1, 70, 55],
+	[1, 70, 44],
+	[2, 35, 17],
+	[2, 35, 13],
+
+	// 4		
+	[1, 100, 80],
+	[2, 50, 32],
+	[2, 50, 24],
+	[4, 25, 9],
+	
+	// 5
+	[1, 134, 108],
+	[2, 67, 43],
+	[2, 33, 15, 2, 34, 16],
+	[2, 33, 11, 2, 34, 12],
+	
+	// 6
+	[2, 86, 68],
+	[4, 43, 27],
+	[4, 43, 19],
+	[4, 43, 15],
+	
+	// 7		
+	[2, 98, 78],
+	[4, 49, 31],
+	[2, 32, 14, 4, 33, 15],
+	[4, 39, 13, 1, 40, 14],
+	
+	// 8
+	[2, 121, 97],
+	[2, 60, 38, 2, 61, 39],
+	[4, 40, 18, 2, 41, 19],
+	[4, 40, 14, 2, 41, 15],
+	
+	// 9
+	[2, 146, 116],
+	[3, 58, 36, 2, 59, 37],
+	[4, 36, 16, 4, 37, 17],
+	[4, 36, 12, 4, 37, 13],
+	
+	// 10		
+	[2, 86, 68, 2, 87, 69],
+	[4, 69, 43, 1, 70, 44],
+	[6, 43, 19, 2, 44, 20],
+	[6, 43, 15, 2, 44, 16],
+
+	// 11
+	[4, 101, 81],
+	[1, 80, 50, 4, 81, 51],
+	[4, 50, 22, 4, 51, 23],
+	[3, 36, 12, 8, 37, 13],
+
+	// 12
+	[2, 116, 92, 2, 117, 93],
+	[6, 58, 36, 2, 59, 37],
+	[4, 46, 20, 6, 47, 21],
+	[7, 42, 14, 4, 43, 15],
+
+	// 13
+	[4, 133, 107],
+	[8, 59, 37, 1, 60, 38],
+	[8, 44, 20, 4, 45, 21],
+	[12, 33, 11, 4, 34, 12],
+
+	// 14
+	[3, 145, 115, 1, 146, 116],
+	[4, 64, 40, 5, 65, 41],
+	[11, 36, 16, 5, 37, 17],
+	[11, 36, 12, 5, 37, 13],
+
+	// 15
+	[5, 109, 87, 1, 110, 88],
+	[5, 65, 41, 5, 66, 42],
+	[5, 54, 24, 7, 55, 25],
+	[11, 36, 12],
+
+	// 16
+	[5, 122, 98, 1, 123, 99],
+	[7, 73, 45, 3, 74, 46],
+	[15, 43, 19, 2, 44, 20],
+	[3, 45, 15, 13, 46, 16],
+
+	// 17
+	[1, 135, 107, 5, 136, 108],
+	[10, 74, 46, 1, 75, 47],
+	[1, 50, 22, 15, 51, 23],
+	[2, 42, 14, 17, 43, 15],
+
+	// 18
+	[5, 150, 120, 1, 151, 121],
+	[9, 69, 43, 4, 70, 44],
+	[17, 50, 22, 1, 51, 23],
+	[2, 42, 14, 19, 43, 15],
+
+	// 19
+	[3, 141, 113, 4, 142, 114],
+	[3, 70, 44, 11, 71, 45],
+	[17, 47, 21, 4, 48, 22],
+	[9, 39, 13, 16, 40, 14],
+
+	// 20
+	[3, 135, 107, 5, 136, 108],
+	[3, 67, 41, 13, 68, 42],
+	[15, 54, 24, 5, 55, 25],
+	[15, 43, 15, 10, 44, 16],
+
+	// 21
+	[4, 144, 116, 4, 145, 117],
+	[17, 68, 42],
+	[17, 50, 22, 6, 51, 23],
+	[19, 46, 16, 6, 47, 17],
+
+	// 22
+	[2, 139, 111, 7, 140, 112],
+	[17, 74, 46],
+	[7, 54, 24, 16, 55, 25],
+	[34, 37, 13],
+
+	// 23
+	[4, 151, 121, 5, 152, 122],
+	[4, 75, 47, 14, 76, 48],
+	[11, 54, 24, 14, 55, 25],
+	[16, 45, 15, 14, 46, 16],
+
+	// 24
+	[6, 147, 117, 4, 148, 118],
+	[6, 73, 45, 14, 74, 46],
+	[11, 54, 24, 16, 55, 25],
+	[30, 46, 16, 2, 47, 17],
+
+	// 25
+	[8, 132, 106, 4, 133, 107],
+	[8, 75, 47, 13, 76, 48],
+	[7, 54, 24, 22, 55, 25],
+	[22, 45, 15, 13, 46, 16],
+
+	// 26
+	[10, 142, 114, 2, 143, 115],
+	[19, 74, 46, 4, 75, 47],
+	[28, 50, 22, 6, 51, 23],
+	[33, 46, 16, 4, 47, 17],
+
+	// 27
+	[8, 152, 122, 4, 153, 123],
+	[22, 73, 45, 3, 74, 46],
+	[8, 53, 23, 26, 54, 24],
+	[12, 45, 15, 28, 46, 16],
+
+	// 28
+	[3, 147, 117, 10, 148, 118],
+	[3, 73, 45, 23, 74, 46],
+	[4, 54, 24, 31, 55, 25],
+	[11, 45, 15, 31, 46, 16],
+
+	// 29
+	[7, 146, 116, 7, 147, 117],
+	[21, 73, 45, 7, 74, 46],
+	[1, 53, 23, 37, 54, 24],
+	[19, 45, 15, 26, 46, 16],
+
+	// 30
+	[5, 145, 115, 10, 146, 116],
+	[19, 75, 47, 10, 76, 48],
+	[15, 54, 24, 25, 55, 25],
+	[23, 45, 15, 25, 46, 16],
+
+	// 31
+	[13, 145, 115, 3, 146, 116],
+	[2, 74, 46, 29, 75, 47],
+	[42, 54, 24, 1, 55, 25],
+	[23, 45, 15, 28, 46, 16],
+
+	// 32
+	[17, 145, 115],
+	[10, 74, 46, 23, 75, 47],
+	[10, 54, 24, 35, 55, 25],
+	[19, 45, 15, 35, 46, 16],
+
+	// 33
+	[17, 145, 115, 1, 146, 116],
+	[14, 74, 46, 21, 75, 47],
+	[29, 54, 24, 19, 55, 25],
+	[11, 45, 15, 46, 46, 16],
+
+	// 34
+	[13, 145, 115, 6, 146, 116],
+	[14, 74, 46, 23, 75, 47],
+	[44, 54, 24, 7, 55, 25],
+	[59, 46, 16, 1, 47, 17],
+
+	// 35
+	[12, 151, 121, 7, 152, 122],
+	[12, 75, 47, 26, 76, 48],
+	[39, 54, 24, 14, 55, 25],
+	[22, 45, 15, 41, 46, 16],
+
+	// 36
+	[6, 151, 121, 14, 152, 122],
+	[6, 75, 47, 34, 76, 48],
+	[46, 54, 24, 10, 55, 25],
+	[2, 45, 15, 64, 46, 16],
+
+	// 37
+	[17, 152, 122, 4, 153, 123],
+	[29, 74, 46, 14, 75, 47],
+	[49, 54, 24, 10, 55, 25],
+	[24, 45, 15, 46, 46, 16],
+
+	// 38
+	[4, 152, 122, 18, 153, 123],
+	[13, 74, 46, 32, 75, 47],
+	[48, 54, 24, 14, 55, 25],
+	[42, 45, 15, 32, 46, 16],
+
+	// 39
+	[20, 147, 117, 4, 148, 118],
+	[40, 75, 47, 7, 76, 48],
+	[43, 54, 24, 22, 55, 25],
+	[10, 45, 15, 67, 46, 16],
+
+	// 40
+	[19, 148, 118, 6, 149, 119],
+	[18, 75, 47, 31, 76, 48],
+	[34, 54, 24, 34, 55, 25],
+	[20, 45, 15, 61, 46, 16]
+];
+
+QRRSBlock.getRSBlocks = function(typeNumber, errorCorrectLevel) {
+	
+	var rsBlock = QRRSBlock.getRsBlockTable(typeNumber, errorCorrectLevel);
+	
+	if (rsBlock === undefined) {
+		throw new Error("bad rs block @ typeNumber:" + typeNumber + "/errorCorrectLevel:" + errorCorrectLevel);
+	}
+
+	var length = rsBlock.length / 3;
+	
+	var list = [];
+	
+	for (var i = 0; i < length; i++) {
+
+		var count = rsBlock[i * 3 + 0];
+		var totalCount = rsBlock[i * 3 + 1];
+		var dataCount  = rsBlock[i * 3 + 2];
+
+		for (var j = 0; j < count; j++) {
+			list.push(new QRRSBlock(totalCount, dataCount) );	
+		}
+	}
+	
+	return list;
+};
+
+QRRSBlock.getRsBlockTable = function(typeNumber, errorCorrectLevel) {
+
+	switch(errorCorrectLevel) {
+	case QRErrorCorrectLevel.L :
+		return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 0];
+	case QRErrorCorrectLevel.M :
+		return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 1];
+	case QRErrorCorrectLevel.Q :
+		return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 2];
+	case QRErrorCorrectLevel.H :
+		return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 3];
+	default :
+		return undefined;
+	}
+};
+
+module.exports = QRRSBlock;
+
+});
+def("QRUtil",function(module,exports,require){
+var QRMode = require('./QRMode');
+var QRPolynomial = require('./QRPolynomial');
+var QRMath = require('./QRMath');
+var QRMaskPattern = require('./QRMaskPattern');
+
+var QRUtil = {
+
+    PATTERN_POSITION_TABLE : [
+        [],
+        [6, 18],
+        [6, 22],
+        [6, 26],
+        [6, 30],
+        [6, 34],
+        [6, 22, 38],
+        [6, 24, 42],
+        [6, 26, 46],
+        [6, 28, 50],
+        [6, 30, 54],        
+        [6, 32, 58],
+        [6, 34, 62],
+        [6, 26, 46, 66],
+        [6, 26, 48, 70],
+        [6, 26, 50, 74],
+        [6, 30, 54, 78],
+        [6, 30, 56, 82],
+        [6, 30, 58, 86],
+        [6, 34, 62, 90],
+        [6, 28, 50, 72, 94],
+        [6, 26, 50, 74, 98],
+        [6, 30, 54, 78, 102],
+        [6, 28, 54, 80, 106],
+        [6, 32, 58, 84, 110],
+        [6, 30, 58, 86, 114],
+        [6, 34, 62, 90, 118],
+        [6, 26, 50, 74, 98, 122],
+        [6, 30, 54, 78, 102, 126],
+        [6, 26, 52, 78, 104, 130],
+        [6, 30, 56, 82, 108, 134],
+        [6, 34, 60, 86, 112, 138],
+        [6, 30, 58, 86, 114, 142],
+        [6, 34, 62, 90, 118, 146],
+        [6, 30, 54, 78, 102, 126, 150],
+        [6, 24, 50, 76, 102, 128, 154],
+        [6, 28, 54, 80, 106, 132, 158],
+        [6, 32, 58, 84, 110, 136, 162],
+        [6, 26, 54, 82, 110, 138, 166],
+        [6, 30, 58, 86, 114, 142, 170]
+    ],
+
+    G15 : (1 << 10) | (1 << 8) | (1 << 5) | (1 << 4) | (1 << 2) | (1 << 1) | (1 << 0),
+    G18 : (1 << 12) | (1 << 11) | (1 << 10) | (1 << 9) | (1 << 8) | (1 << 5) | (1 << 2) | (1 << 0),
+    G15_MASK : (1 << 14) | (1 << 12) | (1 << 10)    | (1 << 4) | (1 << 1),
+
+    getBCHTypeInfo : function(data) {
+        var d = data << 10;
+        while (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G15) >= 0) {
+            d ^= (QRUtil.G15 << (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G15) ) );    
+        }
+        return ( (data << 10) | d) ^ QRUtil.G15_MASK;
+    },
+
+    getBCHTypeNumber : function(data) {
+        var d = data << 12;
+        while (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G18) >= 0) {
+            d ^= (QRUtil.G18 << (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G18) ) );    
+        }
+        return (data << 12) | d;
+    },
+
+    getBCHDigit : function(data) {
+
+        var digit = 0;
+
+        while (data !== 0) {
+            digit++;
+            data >>>= 1;
+        }
+
+        return digit;
+    },
+
+    getPatternPosition : function(typeNumber) {
+        return QRUtil.PATTERN_POSITION_TABLE[typeNumber - 1];
+    },
+
+    getMask : function(maskPattern, i, j) {
+        
+        switch (maskPattern) {
+            
+        case QRMaskPattern.PATTERN000 : return (i + j) % 2 === 0;
+        case QRMaskPattern.PATTERN001 : return i % 2 === 0;
+        case QRMaskPattern.PATTERN010 : return j % 3 === 0;
+        case QRMaskPattern.PATTERN011 : return (i + j) % 3 === 0;
+        case QRMaskPattern.PATTERN100 : return (Math.floor(i / 2) + Math.floor(j / 3) ) % 2 === 0;
+        case QRMaskPattern.PATTERN101 : return (i * j) % 2 + (i * j) % 3 === 0;
+        case QRMaskPattern.PATTERN110 : return ( (i * j) % 2 + (i * j) % 3) % 2 === 0;
+        case QRMaskPattern.PATTERN111 : return ( (i * j) % 3 + (i + j) % 2) % 2 === 0;
+
+        default :
+            throw new Error("bad maskPattern:" + maskPattern);
+        }
+    },
+
+    getErrorCorrectPolynomial : function(errorCorrectLength) {
+
+        var a = new QRPolynomial([1], 0);
+
+        for (var i = 0; i < errorCorrectLength; i++) {
+            a = a.multiply(new QRPolynomial([1, QRMath.gexp(i)], 0) );
+        }
+
+        return a;
+    },
+
+    getLengthInBits : function(mode, type) {
+
+        if (1 <= type && type < 10) {
+
+            // 1 - 9
+
+            switch(mode) {
+            case QRMode.MODE_NUMBER     : return 10;
+            case QRMode.MODE_ALPHA_NUM  : return 9;
+            case QRMode.MODE_8BIT_BYTE  : return 8;
+            case QRMode.MODE_KANJI      : return 8;
+            default :
+                throw new Error("mode:" + mode);
+            }
+
+        } else if (type < 27) {
+
+            // 10 - 26
+
+            switch(mode) {
+            case QRMode.MODE_NUMBER     : return 12;
+            case QRMode.MODE_ALPHA_NUM  : return 11;
+            case QRMode.MODE_8BIT_BYTE  : return 16;
+            case QRMode.MODE_KANJI      : return 10;
+            default :
+                throw new Error("mode:" + mode);
+            }
+
+        } else if (type < 41) {
+
+            // 27 - 40
+
+            switch(mode) {
+            case QRMode.MODE_NUMBER     : return 14;
+            case QRMode.MODE_ALPHA_NUM  : return 13;
+            case QRMode.MODE_8BIT_BYTE  : return 16;
+            case QRMode.MODE_KANJI      : return 12;
+            default :
+                throw new Error("mode:" + mode);
+            }
+
+        } else {
+            throw new Error("type:" + type);
+        }
+    },
+
+    getLostPoint : function(qrCode) {
+        
+        var moduleCount = qrCode.getModuleCount();
+        var lostPoint = 0;
+        var row = 0; 
+        var col = 0;
+
+        
+        // LEVEL1
+        
+        for (row = 0; row < moduleCount; row++) {
+
+            for (col = 0; col < moduleCount; col++) {
+
+                var sameCount = 0;
+                var dark = qrCode.isDark(row, col);
+
+                for (var r = -1; r <= 1; r++) {
+
+                    if (row + r < 0 || moduleCount <= row + r) {
+                        continue;
+                    }
+
+                    for (var c = -1; c <= 1; c++) {
+
+                        if (col + c < 0 || moduleCount <= col + c) {
+                            continue;
+                        }
+
+                        if (r === 0 && c === 0) {
+                            continue;
+                        }
+
+                        if (dark === qrCode.isDark(row + r, col + c) ) {
+                            sameCount++;
+                        }
+                    }
+                }
+
+                if (sameCount > 5) {
+                    lostPoint += (3 + sameCount - 5);
+                }
+            }
+        }
+
+        // LEVEL2
+
+        for (row = 0; row < moduleCount - 1; row++) {
+            for (col = 0; col < moduleCount - 1; col++) {
+                var count = 0;
+                if (qrCode.isDark(row,     col    ) ) count++;
+                if (qrCode.isDark(row + 1, col    ) ) count++;
+                if (qrCode.isDark(row,     col + 1) ) count++;
+                if (qrCode.isDark(row + 1, col + 1) ) count++;
+                if (count === 0 || count === 4) {
+                    lostPoint += 3;
+                }
+            }
+        }
+
+        // LEVEL3
+
+        for (row = 0; row < moduleCount; row++) {
+            for (col = 0; col < moduleCount - 6; col++) {
+                if (qrCode.isDark(row, col) && 
+                        !qrCode.isDark(row, col + 1) && 
+                         qrCode.isDark(row, col + 2) && 
+                         qrCode.isDark(row, col + 3) && 
+                         qrCode.isDark(row, col + 4) && 
+                        !qrCode.isDark(row, col + 5) && 
+                         qrCode.isDark(row, col + 6) ) {
+                    lostPoint += 40;
+                }
+            }
+        }
+
+        for (col = 0; col < moduleCount; col++) {
+            for (row = 0; row < moduleCount - 6; row++) {
+                if (qrCode.isDark(row, col) &&
+                        !qrCode.isDark(row + 1, col) &&
+                         qrCode.isDark(row + 2, col) &&
+                         qrCode.isDark(row + 3, col) &&
+                         qrCode.isDark(row + 4, col) &&
+                        !qrCode.isDark(row + 5, col) &&
+                         qrCode.isDark(row + 6, col) ) {
+                    lostPoint += 40;
+                }
+            }
+        }
+
+        // LEVEL4
+        
+        var darkCount = 0;
+
+        for (col = 0; col < moduleCount; col++) {
+            for (row = 0; row < moduleCount; row++) {
+                if (qrCode.isDark(row, col) ) {
+                    darkCount++;
+                }
+            }
+        }
+        
+        var ratio = Math.abs(100 * darkCount / moduleCount / moduleCount - 50) / 5;
+        lostPoint += ratio * 10;
+
+        return lostPoint;       
+    }
+
+};
+
+module.exports = QRUtil;
+
+});
+def("QRBitBuffer",function(module,exports,require){
+function QRBitBuffer() {
+	this.buffer = [];
+	this.length = 0;
+}
+
+QRBitBuffer.prototype = {
+
+	get : function(index) {
+		var bufIndex = Math.floor(index / 8);
+		return ( (this.buffer[bufIndex] >>> (7 - index % 8) ) & 1) == 1;
+	},
+	
+	put : function(num, length) {
+		for (var i = 0; i < length; i++) {
+			this.putBit( ( (num >>> (length - i - 1) ) & 1) == 1);
+		}
+	},
+	
+	getLengthInBits : function() {
+		return this.length;
+	},
+	
+	putBit : function(bit) {
+	
+		var bufIndex = Math.floor(this.length / 8);
+		if (this.buffer.length <= bufIndex) {
+			this.buffer.push(0);
+		}
+	
+		if (bit) {
+			this.buffer[bufIndex] |= (0x80 >>> (this.length % 8) );
+		}
+	
+		this.length++;
+	}
+};
+
+module.exports = QRBitBuffer;
+
+});
+def("QR8bitByte",function(module,exports,require){
+var QRMode = require('./QRMode');
+
+function QR8bitByte(data) {
+	this.mode = QRMode.MODE_8BIT_BYTE;
+	this.data = data;
+}
+
+QR8bitByte.prototype = {
+
+	getLength : function() {
+		return this.data.length;
+	},
+	
+	write : function(buffer) {
+		for (var i = 0; i < this.data.length; i++) {
+			// not JIS ...
+			buffer.put(this.data.charCodeAt(i), 8);
+		}
+	}
+};
+
+module.exports = QR8bitByte;
+
+});
+def("index",function(module,exports,require){
+//---------------------------------------------------------------------
+// QRCode for JavaScript
+//
+// Copyright (c) 2009 Kazuhiko Arase
+//
+// URL: http://www.d-project.com/
+//
+// Licensed under the MIT license:
+//   http://www.opensource.org/licenses/mit-license.php
+//
+// The word "QR Code" is registered trademark of 
+// DENSO WAVE INCORPORATED
+//   http://www.denso-wave.com/qrcode/faqpatent-e.html
+//
+//---------------------------------------------------------------------
+// Modified to work in node for this project (and some refactoring)
+//---------------------------------------------------------------------
+
+var QR8bitByte = require('./QR8bitByte');
+var QRUtil = require('./QRUtil');
+var QRPolynomial = require('./QRPolynomial');
+var QRRSBlock = require('./QRRSBlock');
+var QRBitBuffer = require('./QRBitBuffer');
+
+function QRCode(typeNumber, errorCorrectLevel) {
+	this.typeNumber = typeNumber;
+	this.errorCorrectLevel = errorCorrectLevel;
+	this.modules = null;
+	this.moduleCount = 0;
+	this.dataCache = null;
+	this.dataList = [];
+}
+
+QRCode.prototype = {
+	
+	addData : function(data) {
+		var newData = new QR8bitByte(data);
+		this.dataList.push(newData);
+		this.dataCache = null;
+	},
+	
+	isDark : function(row, col) {
+		if (row < 0 || this.moduleCount <= row || col < 0 || this.moduleCount <= col) {
+			throw new Error(row + "," + col);
+		}
+		return this.modules[row][col];
+	},
+
+	getModuleCount : function() {
+		return this.moduleCount;
+	},
+	
+	make : function() {
+		// Calculate automatically typeNumber if provided is < 1
+		if (this.typeNumber < 1 ){
+			var typeNumber = 1;
+			for (typeNumber = 1; typeNumber < 40; typeNumber++) {
+				var rsBlocks = QRRSBlock.getRSBlocks(typeNumber, this.errorCorrectLevel);
+
+				var buffer = new QRBitBuffer();
+				var totalDataCount = 0;
+				for (var i = 0; i < rsBlocks.length; i++) {
+					totalDataCount += rsBlocks[i].dataCount;
+				}
+
+				for (var x = 0; x < this.dataList.length; x++) {
+					var data = this.dataList[x];
+					buffer.put(data.mode, 4);
+					buffer.put(data.getLength(), QRUtil.getLengthInBits(data.mode, typeNumber) );
+					data.write(buffer);
+				}
+				if (buffer.getLengthInBits() <= totalDataCount * 8)
+					break;
+			}
+			this.typeNumber = typeNumber;
+		}
+		this.makeImpl(false, this.getBestMaskPattern() );
+	},
+	
+	makeImpl : function(test, maskPattern) {
+		
+		this.moduleCount = this.typeNumber * 4 + 17;
+		this.modules = new Array(this.moduleCount);
+		
+		for (var row = 0; row < this.moduleCount; row++) {
+			
+			this.modules[row] = new Array(this.moduleCount);
+			
+			for (var col = 0; col < this.moduleCount; col++) {
+				this.modules[row][col] = null;//(col + row) % 3;
+			}
+		}
+	
+		this.setupPositionProbePattern(0, 0);
+		this.setupPositionProbePattern(this.moduleCount - 7, 0);
+		this.setupPositionProbePattern(0, this.moduleCount - 7);
+		this.setupPositionAdjustPattern();
+		this.setupTimingPattern();
+		this.setupTypeInfo(test, maskPattern);
+		
+		if (this.typeNumber >= 7) {
+			this.setupTypeNumber(test);
+		}
+	
+		if (this.dataCache === null) {
+			this.dataCache = QRCode.createData(this.typeNumber, this.errorCorrectLevel, this.dataList);
+		}
+	
+		this.mapData(this.dataCache, maskPattern);
+	},
+
+	setupPositionProbePattern : function(row, col)  {
+		
+		for (var r = -1; r <= 7; r++) {
+			
+			if (row + r <= -1 || this.moduleCount <= row + r) continue;
+			
+			for (var c = -1; c <= 7; c++) {
+				
+				if (col + c <= -1 || this.moduleCount <= col + c) continue;
+				
+				if ( (0 <= r && r <= 6 && (c === 0 || c === 6) ) || 
+                     (0 <= c && c <= 6 && (r === 0 || r === 6) ) || 
+                     (2 <= r && r <= 4 && 2 <= c && c <= 4) ) {
+					this.modules[row + r][col + c] = true;
+				} else {
+					this.modules[row + r][col + c] = false;
+				}
+			}		
+		}		
+	},
+	
+	getBestMaskPattern : function() {
+	
+		var minLostPoint = 0;
+		var pattern = 0;
+	
+		for (var i = 0; i < 8; i++) {
+			
+			this.makeImpl(true, i);
+	
+			var lostPoint = QRUtil.getLostPoint(this);
+	
+			if (i === 0 || minLostPoint >  lostPoint) {
+				minLostPoint = lostPoint;
+				pattern = i;
+			}
+		}
+	
+		return pattern;
+	},
+	
+	createMovieClip : function(target_mc, instance_name, depth) {
+	
+		var qr_mc = target_mc.createEmptyMovieClip(instance_name, depth);
+		var cs = 1;
+	
+		this.make();
+
+		for (var row = 0; row < this.modules.length; row++) {
+			
+			var y = row * cs;
+			
+			for (var col = 0; col < this.modules[row].length; col++) {
+	
+				var x = col * cs;
+				var dark = this.modules[row][col];
+			
+				if (dark) {
+					qr_mc.beginFill(0, 100);
+					qr_mc.moveTo(x, y);
+					qr_mc.lineTo(x + cs, y);
+					qr_mc.lineTo(x + cs, y + cs);
+					qr_mc.lineTo(x, y + cs);
+					qr_mc.endFill();
+				}
+			}
+		}
+		
+		return qr_mc;
+	},
+
+	setupTimingPattern : function() {
+		
+		for (var r = 8; r < this.moduleCount - 8; r++) {
+			if (this.modules[r][6] !== null) {
+				continue;
+			}
+			this.modules[r][6] = (r % 2 === 0);
+		}
+	
+		for (var c = 8; c < this.moduleCount - 8; c++) {
+			if (this.modules[6][c] !== null) {
+				continue;
+			}
+			this.modules[6][c] = (c % 2 === 0);
+		}
+	},
+	
+	setupPositionAdjustPattern : function() {
+	
+		var pos = QRUtil.getPatternPosition(this.typeNumber);
+		
+		for (var i = 0; i < pos.length; i++) {
+		
+			for (var j = 0; j < pos.length; j++) {
+			
+				var row = pos[i];
+				var col = pos[j];
+				
+				if (this.modules[row][col] !== null) {
+					continue;
+				}
+				
+				for (var r = -2; r <= 2; r++) {
+				
+					for (var c = -2; c <= 2; c++) {
+					
+						if (Math.abs(r) === 2 || 
+                            Math.abs(c) === 2 ||
+                            (r === 0 && c === 0) ) {
+							this.modules[row + r][col + c] = true;
+						} else {
+							this.modules[row + r][col + c] = false;
+						}
+					}
+				}
+			}
+		}
+	},
+	
+	setupTypeNumber : function(test) {
+	
+		var bits = QRUtil.getBCHTypeNumber(this.typeNumber);
+        var mod;
+	
+		for (var i = 0; i < 18; i++) {
+			mod = (!test && ( (bits >> i) & 1) === 1);
+			this.modules[Math.floor(i / 3)][i % 3 + this.moduleCount - 8 - 3] = mod;
+		}
+	
+		for (var x = 0; x < 18; x++) {
+			mod = (!test && ( (bits >> x) & 1) === 1);
+			this.modules[x % 3 + this.moduleCount - 8 - 3][Math.floor(x / 3)] = mod;
+		}
+	},
+	
+	setupTypeInfo : function(test, maskPattern) {
+	
+		var data = (this.errorCorrectLevel << 3) | maskPattern;
+		var bits = QRUtil.getBCHTypeInfo(data);
+        var mod;
+	
+		// vertical		
+		for (var v = 0; v < 15; v++) {
+	
+			mod = (!test && ( (bits >> v) & 1) === 1);
+	
+			if (v < 6) {
+				this.modules[v][8] = mod;
+			} else if (v < 8) {
+				this.modules[v + 1][8] = mod;
+			} else {
+				this.modules[this.moduleCount - 15 + v][8] = mod;
+			}
+		}
+	
+		// horizontal
+		for (var h = 0; h < 15; h++) {
+	
+			mod = (!test && ( (bits >> h) & 1) === 1);
+			
+			if (h < 8) {
+				this.modules[8][this.moduleCount - h - 1] = mod;
+			} else if (h < 9) {
+				this.modules[8][15 - h - 1 + 1] = mod;
+			} else {
+				this.modules[8][15 - h - 1] = mod;
+			}
+		}
+	
+		// fixed module
+		this.modules[this.moduleCount - 8][8] = (!test);
+	
+	},
+	
+	mapData : function(data, maskPattern) {
+		
+		var inc = -1;
+		var row = this.moduleCount - 1;
+		var bitIndex = 7;
+		var byteIndex = 0;
+		
+		for (var col = this.moduleCount - 1; col > 0; col -= 2) {
+	
+			if (col === 6) col--;
+	
+			while (true) {
+	
+				for (var c = 0; c < 2; c++) {
+					
+					if (this.modules[row][col - c] === null) {
+						
+						var dark = false;
+	
+						if (byteIndex < data.length) {
+							dark = ( ( (data[byteIndex] >>> bitIndex) & 1) === 1);
+						}
+	
+						var mask = QRUtil.getMask(maskPattern, row, col - c);
+	
+						if (mask) {
+							dark = !dark;
+						}
+						
+						this.modules[row][col - c] = dark;
+						bitIndex--;
+	
+						if (bitIndex === -1) {
+							byteIndex++;
+							bitIndex = 7;
+						}
+					}
+				}
+								
+				row += inc;
+	
+				if (row < 0 || this.moduleCount <= row) {
+					row -= inc;
+					inc = -inc;
+					break;
+				}
+			}
+		}
+		
+	}
+
+};
+
+QRCode.PAD0 = 0xEC;
+QRCode.PAD1 = 0x11;
+
+QRCode.createData = function(typeNumber, errorCorrectLevel, dataList) {
+	
+	var rsBlocks = QRRSBlock.getRSBlocks(typeNumber, errorCorrectLevel);
+	
+	var buffer = new QRBitBuffer();
+	
+	for (var i = 0; i < dataList.length; i++) {
+		var data = dataList[i];
+		buffer.put(data.mode, 4);
+		buffer.put(data.getLength(), QRUtil.getLengthInBits(data.mode, typeNumber) );
+		data.write(buffer);
+	}
+
+	// calc num max data.
+	var totalDataCount = 0;
+	for (var x = 0; x < rsBlocks.length; x++) {
+		totalDataCount += rsBlocks[x].dataCount;
+	}
+
+	if (buffer.getLengthInBits() > totalDataCount * 8) {
+		throw new Error("code length overflow. (" + 
+            buffer.getLengthInBits() + 
+            ">" +  
+            totalDataCount * 8 + 
+            ")");
+	}
+
+	// end code
+	if (buffer.getLengthInBits() + 4 <= totalDataCount * 8) {
+		buffer.put(0, 4);
+	}
+
+	// padding
+	while (buffer.getLengthInBits() % 8 !== 0) {
+		buffer.putBit(false);
+	}
+
+	// padding
+	while (true) {
+		
+		if (buffer.getLengthInBits() >= totalDataCount * 8) {
+			break;
+		}
+		buffer.put(QRCode.PAD0, 8);
+		
+		if (buffer.getLengthInBits() >= totalDataCount * 8) {
+			break;
+		}
+		buffer.put(QRCode.PAD1, 8);
+	}
+
+	return QRCode.createBytes(buffer, rsBlocks);
+};
+
+QRCode.createBytes = function(buffer, rsBlocks) {
+
+	var offset = 0;
+	
+	var maxDcCount = 0;
+	var maxEcCount = 0;
+	
+	var dcdata = new Array(rsBlocks.length);
+	var ecdata = new Array(rsBlocks.length);
+	
+	for (var r = 0; r < rsBlocks.length; r++) {
+
+		var dcCount = rsBlocks[r].dataCount;
+		var ecCount = rsBlocks[r].totalCount - dcCount;
+
+		maxDcCount = Math.max(maxDcCount, dcCount);
+		maxEcCount = Math.max(maxEcCount, ecCount);
+		
+		dcdata[r] = new Array(dcCount);
+		
+		for (var i = 0; i < dcdata[r].length; i++) {
+			dcdata[r][i] = 0xff & buffer.buffer[i + offset];
+		}
+		offset += dcCount;
+		
+		var rsPoly = QRUtil.getErrorCorrectPolynomial(ecCount);
+		var rawPoly = new QRPolynomial(dcdata[r], rsPoly.getLength() - 1);
+
+		var modPoly = rawPoly.mod(rsPoly);
+		ecdata[r] = new Array(rsPoly.getLength() - 1);
+		for (var x = 0; x < ecdata[r].length; x++) {
+            var modIndex = x + modPoly.getLength() - ecdata[r].length;
+			ecdata[r][x] = (modIndex >= 0)? modPoly.get(modIndex) : 0;
+		}
+
+	}
+	
+	var totalCodeCount = 0;
+	for (var y = 0; y < rsBlocks.length; y++) {
+		totalCodeCount += rsBlocks[y].totalCount;
+	}
+
+	var data = new Array(totalCodeCount);
+	var index = 0;
+
+	for (var z = 0; z < maxDcCount; z++) {
+		for (var s = 0; s < rsBlocks.length; s++) {
+			if (z < dcdata[s].length) {
+				data[index++] = dcdata[s][z];
+			}
+		}
+	}
+
+	for (var xx = 0; xx < maxEcCount; xx++) {
+		for (var t = 0; t < rsBlocks.length; t++) {
+			if (xx < ecdata[t].length) {
+				data[index++] = ecdata[t][xx];
+			}
+		}
+	}
+
+	return data;
+
+};
+
+module.exports = QRCode;
+
+});
+window.__QRC=req("index");window.__QRL=req("QRErrorCorrectLevel");})();
+
+(function(){
+const C128=["212222", "222122", "222221", "121223", "121322", "131222", "122213", "122312", "132212", "221213", "221312", "231212", "112232", "122132", "122231", "113222", "123122", "123221", "223211", "221132", "221231", "213212", "223112", "312131", "311222", "321122", "321221", "312212", "322112", "322211", "212123", "212321", "232121", "111323", "131123", "131321", "112313", "132113", "132311", "211313", "231113", "231311", "112133", "112331", "132131", "113123", "113321", "133121", "313121", "211331", "231131", "213113", "213311", "213131", "311123", "311321", "331121", "312113", "312311", "332111", "314111", "221411", "431111", "111224", "111422", "121124", "121421", "141122", "141221", "112214", "112412", "122114", "122411", "142112", "142211", "241211", "221114", "413111", "241112", "134111", "111242", "121142", "121241", "114212", "124112", "124211", "411212", "421112", "421211", "212141", "214121", "412121", "111143", "111341", "131141", "114113", "114311", "411113", "411311", "113141", "114131", "311141", "411131", "211412", "211214", "211232", "2331112"];
+const $=id=>document.getElementById(id);
+const utf8=s=>unescape(encodeURIComponent(s));
+function qrMatrix(text,lvl){const L=window.__QRL,lv=({L:L.L,M:L.M,Q:L.Q,H:L.H})[lvl];for(let t=1;t<=40;t++){try{const q=new window.__QRC(t,lv===undefined?L.M:lv);q.addData(utf8(text));q.make();return q}catch(e){}}throw new Error("النص طويل جدًا لرمز QR")}
+function drawQR(text,lvl,color){const q=qrMatrix(text,lvl),n=q.getModuleCount(),s=Math.max(4,Math.floor(720/(n+8))),sz=(n+8)*s,c=document.createElement("canvas");c.width=c.height=sz;const g=c.getContext("2d");g.fillStyle="#fff";g.fillRect(0,0,sz,sz);g.fillStyle=color||"#000";for(let r=0;r<n;r++)for(let k=0;k<n;k++)if(q.isDark(r,k))g.fillRect((k+4)*s,(r+4)*s,s,s);return c}
+function codes128(text){if(!/^[\x20-\x7e]+$/.test(text))throw new Error("Code128 يدعم الإنجليزية والأرقام والرموز فقط. للعربية استخدم QR");const num=/^\d+$/.test(text)&&text.length%2===0;let cs;if(num){cs=[105];for(let i=0;i<text.length;i+=2)cs.push(+text.substr(i,2))}else{cs=[104];for(const ch of text)cs.push(ch.charCodeAt(0)-32)}let sum=cs[0];for(let i=1;i<cs.length;i++)sum+=cs[i]*i;cs.push(sum%103);cs.push(106);return cs}
+function drawC128(text,color,showText){const cs=codes128(text),mod=3,quiet=10*mod,h=130;let mods=0;cs.forEach(v=>{for(const ch of C128[v])mods+=+ch});const w=mods*mod+quiet*2,th=showText?36:0,c=document.createElement("canvas");c.width=w;c.height=h+th+16;const g=c.getContext("2d");g.fillStyle="#fff";g.fillRect(0,0,c.width,c.height);g.fillStyle=color||"#000";let x=quiet;cs.forEach(v=>{const p=C128[v];for(let i=0;i<p.length;i++){const wd=+p[i]*mod;if(i%2===0)g.fillRect(x,8,wd,h);x+=wd}});if(showText){g.font="600 26px 'Courier New',monospace";g.textAlign="center";g.textBaseline="top";g.fillText(text,w/2,h+14)}return c}
+window.__bcDraw=(type,text,lvl,color,tx)=>type==="qr"?drawQR(text,lvl,color):drawC128(text,color,tx);
+function cur(){return{type:$("bct").value,text:$("bcv").value.trim(),lvl:$("bcl").value,color:$("bcc").value,all:$("bcw").value==="all",tx:$("bctx").checked}}
+function prev(){const o=cur(),box=$("bcp");box.innerHTML="";if(!o.text){box.textContent="اكتب الرابط أو النص لتظهر المعاينة";return}try{const cv=window.__bcDraw(o.type,o.text,o.lvl,o.color,o.tx);cv.style.maxWidth="100%";cv.style.maxHeight="190px";box.append(cv)}catch(e){box.textContent=e.message}}
+window.bcOpen=()=>{$("bcm").classList.add("on");prev()};
+["bct","bcv","bcl","bcc","bcw","bctx"].forEach(id=>{$(id).addEventListener("input",prev);$(id).addEventListener("change",prev)});
+$("bct").addEventListener("change",()=>{const q=$("bct").value==="qr";$("bcll").style.display=q?"":"none";$("bctxl").style.display=q?"none":""});
+async function insert(blob,wf,all){
+  const bytes=new Uint8Array(await blob.arrayBuffer()),u=URL.createObjectURL(new Blob([bytes],{type:"image/png"})),t=new Image();
+  await new Promise((res,rej)=>{t.onload=res;t.onerror=()=>rej(new Error("تعذّر قراءة الصورة"));t.src=u});
+  const r=t.naturalHeight/t.naturalWidth;
+  if(!pages.length)throw new Error("افتح ملف PDF أولًا");
+  if(all){pages.forEach(p=>(p.img??=[]).push({x:Math.max(0,1-wf-.04),y:Math.max(.02,1-wf*r*.72-.03),w:wf,u,b:bytes,m:"image/png",r}))}
+  else{const ws=[...document.querySelectorAll(".wrap")],mid=innerHeight/2;let bi=0,bd=1e9;ws.forEach((w,i)=>{const q=w.getBoundingClientRect(),d=q.top<=mid&&q.bottom>=mid?0:Math.min(Math.abs(q.top-mid),Math.abs(q.bottom-mid));if(d<bd){bd=d;bi=i}});const q=ws[bi].getBoundingClientRect(),y=Math.min(.7,Math.max(.02,(mid-q.top)/q.height-.1));(pages[bi].img??=[]).push({x:.35,y,w:wf,u,b:bytes,m:"image/png",r,fresh:1})}
+  render();
+}
+$("bcok").onclick=async()=>{const o=cur();if(!o.text)return toast("اكتب الرابط أو النص أولًا.");try{const cv=window.__bcDraw(o.type,o.text,o.lvl,o.color,o.tx),blob=await new Promise(r=>cv.toBlob(r,"image/png"));await insert(blob,o.type==="qr"?.24:.5,o.all);$("bcm").classList.remove("on");toast(o.all?"أُضيف الباركود على كل الصفحات.":"أُضيف الباركود. اسحبه لمكانه وغيّر حجمه من المقابض.")}catch(e){toast("تعذّر إنشاء الباركود: "+((e&&e.message)||e))}};
+$("bcx").onclick=()=>$("bcm").classList.remove("on");
+})();
+
+</script>
 <script>
 pdfjsLib.GlobalWorkerOptions.workerSrc="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
 const $=id=>document.getElementById(id);
@@ -320,13 +1634,13 @@ async function render(){
     cb.onchange=()=>{pg.sel=cb.checked;wrap.classList.toggle("sel",pg.sel);updateUI()};
     const mk=(t,fn,c)=>{const b=document.createElement("button");b.textContent=t;b.onclick=fn;if(c)b.className=c;return b};
     bar.append(cb,"صفحة "+(n+1),
-      mk("تدوير",()=>{if(pg.ov.length||(pg.img||[]).length)return toast("احذف النص أو الصور المضافة قبل تدوير هذه الصفحة.");pg.rot=(pg.rot+90)%360;render()}),
+      mk("تدوير",()=>{if(pg.ov.length||(pg.img||[]).length||(pg.an||[]).length)return toast("احذف النص أو الصور أو التعليقات المضافة قبل تدوير هذه الصفحة.");pg.rot=(pg.rot+90)%360;render()}),
       mk("↑",()=>{if(n>0){[pages[n-1],pages[n]]=[pages[n],pages[n-1]];render()}}),
       mk("↓",()=>{if(n<pages.length-1){[pages[n+1],pages[n]]=[pages[n],pages[n+1]];render()}}),
-      mk("حذف",()=>{pages.splice(n,1);render()},"x"));if(pg.src){if(!pg.ocr){const ls=document.createElement("select");ls.setAttribute("aria-label","لغة النص");[["ara","عربي"],["eng","English"],["ara+eng","عربي + English"]].forEach(([v,t])=>ls.add(new Option(t,v)));bar.append(ls,mk("تحليل النص",()=>window.imgOcr&&imgOcr(pg,ls.value)))}else bar.append(mk("مسح التحليل",()=>{pg.ocr=null;pg.ov=pg.ov.filter(o=>!o.cover);render()}))}
+      mk("حذف",()=>{pages.splice(n,1);render()},"x"));if(window.__clip)bar.append(mk("لصق نص",()=>{pg.ov.push({...window.__clip});render()}));if(pg.src){if(!pg.ocr){const ls=document.createElement("select");ls.setAttribute("aria-label","لغة النص");[["ara","عربي"],["eng","English"],["ara+eng","عربي + English"]].forEach(([v,t])=>ls.add(new Option(t,v)));bar.append(ls,mk("تحليل النص",()=>window.imgOcr&&imgOcr(pg,ls.value)))}else bar.append(mk("مسح التحليل",()=>{pg.ocr=null;pg.ov=pg.ov.filter(o=>!o.cover);render()}))}
     const wrap=document.createElement("div");wrap.className="wrap"+(pg.sel?" sel":"")+(addMode?" add":"");
     const cv=document.createElement("canvas");cv.width=vp.width;cv.height=vp.height;cv.style.width=vp.width/1.3+"px";cv.style.height=vp.height/1.3+"px";
-    wrap.style.width=vp.width/1.3+"px";wrap.style.height=vp.height/1.3+"px";wrap.append(cv);
+    wrap.style.width=vp.width/1.3+"px";wrap.style.height=vp.height/1.3+"px";wrap.append(cv);annLayer(pg,wrap,vp.width/1.3,vp.height/1.3);
     const dispScale=zoom*(rot%180?1:1); // CSS px per pt
     (pg.img||[]).forEach(im=>wrap.append(mkIm(pg,im,wrap)));pg.ov.forEach(o=>wrap.append(mkOv(pg,o,dispScale,wrap)));
     wrap.onclick=e=>{
@@ -346,29 +1660,108 @@ const redock=()=>document.querySelectorAll(".ov.sel,.im.sel").forEach(x=>dock(x,
 addEventListener("scroll",redock,true);addEventListener("resize",redock);if(window.visualViewport){visualViewport.addEventListener("resize",redock);visualViewport.addEventListener("scroll",redock)}
 function pick(el){document.querySelectorAll(".ov.sel,.im.sel").forEach(x=>{if(x!==el)x.classList.remove("sel")});el.classList.add("sel")}
 function dropSel(){cur=null;if(document.activeElement&&document.activeElement.blur)document.activeElement.blur();pages.forEach(p=>p.ov=p.ov.filter(o=>o.t.trim()||o.cover));document.querySelectorAll(".im.sel").forEach(x=>x.classList.remove("sel"));document.querySelectorAll(".ov").forEach(x=>{if(!x.querySelector(".t").innerText.trim())x.remove();else{x.classList.remove("sel","edit");x.querySelector(".t").contentEditable="false"}})}
-addEventListener("pointerdown",e=>{const t=e.target;if(t.closest&&t.closest(".ov,.im,header,#toast"))return;dropSel()},true);
+addEventListener("pointerdown",e=>{
+  const pf=window.pickBgFor;
+  if(pf){const w=e.target.closest&&e.target.closest(".wrap");
+    if(w){window.pickBgFor=null;e.preventDefault();e.stopPropagation();
+      try{const cv=w.querySelector("canvas"),r=cv.getBoundingClientRect(),x=Math.max(1,Math.min(cv.width-2,Math.round((e.clientX-r.left)*cv.width/r.width))),y=Math.max(1,Math.min(cv.height-2,Math.round((e.clientY-r.top)*cv.height/r.height))),d=cv.getContext("2d").getImageData(x-1,y-1,3,3).data;let R=0,G=0,B=0;for(let i=0;i<36;i+=4){R+=d[i];G+=d[i+1];B+=d[i+2]}
+        const hx="#"+[R,G,B].map(v=>Math.round(v/9).toString(16).padStart(2,"0")).join("");pf.o.cover.bg=hx;pf.o.cover.img0=pf.o.cover.img0||pf.o.cover.img;pf.o.cover.img=null;pf.cbg.value=hx;pf.applyCover();toast("تم التقاط اللون "+hx)}catch(err){toast("تعذّر التقاط اللون.")}
+      return}
+    else if(!e.target.closest(".ov,.tb")){window.pickBgFor=null}}
+  const t=e.target;if(t.closest&&t.closest(".ov,.im,header,#toast"))return;dropSel()},true);
 function styleOv(el,o,k){el.style.fontFamily=FONTS[eff(o)][1]+",Arial,sans-serif";el.style.fontWeight=o.b?"700":"400";el.style.color=o.c;el.style.fontSize=o.s*k+"px"}
 function sampleBg(wrap,g,W,top,bh){try{const cv=wrap.querySelector("canvas"),k=cv.width/W,x=Math.max(0,Math.floor((g.l-3)*k)),y=Math.max(0,Math.floor(top*k)),w=Math.max(1,Math.min(cv.width-x,Math.ceil((g.r-g.l+6)*k))),h=Math.max(1,Math.min(cv.height-y,Math.ceil(bh*k))),d=cv.getContext("2d").getImageData(x,y,w,h).data,m={};let best=0,bk=null;for(let i=0;i<d.length;i+=4){const q=(d[i]>>4)+","+(d[i+1]>>4)+","+(d[i+2]>>4),e=m[q]||(m[q]={n:0,r:0,g:0,b:0});e.n++;e.r+=d[i];e.g+=d[i+1];e.b+=d[i+2];if(e.n>best){best=e.n;bk=e}}return"#"+[bk.r,bk.g,bk.b].map(v=>Math.round(v/bk.n).toString(16).padStart(2,"0")).join("")}catch(e){return"#ffffff"}}
+async function inpaintHi(page,x0,y0,bw,bh,bg){try{
+  const vp0=page.getViewport({scale:1,rotation:0}),PW=vp0.width,PH=vp0.height,m=5;
+  const S=Math.max(1.5,Math.min(3,Math.sqrt(450000/Math.max(1,bw*bh))));
+  const X=Math.max(0,x0-m),Y=Math.max(0,y0-m),X2=Math.min(PW,x0+bw+m),Y2=Math.min(PH,y0+bh+m);
+  const rw=Math.round((X2-X)*S),rh=Math.round((Y2-Y)*S);
+  if(rw<8||rh<8||rw*rh>6e6)return null;
+  const cv=document.createElement("canvas");cv.width=rw;cv.height=rh;
+  const ctx=cv.getContext("2d",{willReadFrequently:true});ctx.fillStyle="#fff";ctx.fillRect(0,0,rw,rh);
+  await page.render({canvasContext:ctx,viewport:page.getViewport({scale:S,rotation:0,offsetX:-X*S,offsetY:-Y*S})}).promise;
+  const bx=Math.round((x0-X)*S),by=Math.round((y0-Y)*S),w=Math.min(rw-bx,Math.round(bw*S)),h=Math.min(rh-by,Math.round(bh*S));
+  if(bx<0||by<0||w<3||h<3)return null;
+  const D=ctx.getImageData(0,0,rw,rh).data,P=(x,y)=>((by+y)*rw+bx+x)*4;
+  // 1) خلفية مرجعية محلية (اللون الأكثر شيوعًا في نافذة صغيرة داخل المربع فقط)
+  const GS=8,gw=Math.ceil(w/GS),gh=Math.ceil(h/GS),RG=new Float32Array(gw*gh*3),WIN=Math.max(10,Math.round(S*6));
+  for(let gy=0;gy<gh;gy++)for(let gx=0;gx<gw;gx++){
+    const cx=Math.min(w-1,gx*GS+(GS>>1)),cy=Math.min(h-1,gy*GS+(GS>>1));
+    const xa=Math.max(0,cx-WIN),xb=Math.min(w-1,cx+WIN),ya=Math.max(0,cy-WIN),yb=Math.min(h-1,cy+WIN),mp=new Map();let best=null,bn=0;
+    for(let y=ya;y<=yb;y+=2)for(let x=xa;x<=xb;x+=2){const i=P(x,y),q=((D[i]>>4)<<8)|((D[i+1]>>4)<<4)|(D[i+2]>>4);let e=mp.get(q);if(!e){e={n:0,r:0,g:0,b:0};mp.set(q,e)}e.n++;e.r+=D[i];e.g+=D[i+1];e.b+=D[i+2];if(e.n>bn){bn=e.n;best=e}}
+    const k=(gy*gw+gx)*3;RG[k]=best.r/best.n;RG[k+1]=best.g/best.n;RG[k+2]=best.b/best.n}
+  const ref=(x,y,c)=>{const fx=Math.min(gw-1,Math.max(0,(x-GS/2)/GS)),fy=Math.min(gh-1,Math.max(0,(y-GS/2)/GS)),x1=Math.floor(fx),y1=Math.floor(fy),x2=Math.min(gw-1,x1+1),y2=Math.min(gh-1,y1+1),tx=fx-x1,ty=fy-y1,g=(xx,yy)=>RG[(yy*gw+xx)*3+c];return(g(x1,y1)*(1-tx)+g(x2,y1)*tx)*(1-ty)+(g(x1,y2)*(1-tx)+g(x2,y2)*tx)*ty};
+  // 2) قناع الحروف
+  const mask=new Uint8Array(w*h);
+  for(let y=0;y<h;y++)for(let x=0;x<w;x++){const i=P(x,y);let d=0;for(let c=0;c<3;c++)d+=Math.abs(D[i+c]-ref(x,y,c));if(d>60)mask[y*w+x]=1}
+  // 3) حماية خطوط الجداول (خط يمتد على كل عرض أو ارتفاع المربع)
+  const line=new Uint8Array(w*h),E=2;
+  for(let y=0;y<h;y++){let x=0;while(x<w){if(!mask[y*w+x]){x++;continue}const s=x;while(x<w&&mask[y*w+x])x++;if(x-s>=.92*w&&s<=E&&x>=w-E)for(let j=s;j<x;j++)line[y*w+j]=1}}
+  for(let x=0;x<w;x++){let y=0;while(y<h){if(!mask[y*w+x]){y++;continue}const s=y;while(y<h&&mask[y*w+x])y++;if(y-s>=.92*h&&s<=E&&y>=h-E)for(let j=s;j<y;j++)line[j*w+x]=1}}
+  for(let k=0;k<w*h;k++)if(line[k])mask[k]=0;
+  // 4) توسيع القناع لتغطية حواف الحروف
+  const rad=Math.max(2,Math.round(S*1.2)),tmp=new Uint8Array(w*h),dil=new Uint8Array(w*h);
+  for(let y=0;y<h;y++)for(let x=0;x<w;x++){let on=0;for(let j=Math.max(0,x-rad);j<=Math.min(w-1,x+rad);j++)if(mask[y*w+j]){on=1;break}tmp[y*w+x]=on}
+  for(let x=0;x<w;x++)for(let y=0;y<h;y++){let on=0;for(let j=Math.max(0,y-rad);j<=Math.min(h-1,y+rad);j++)if(tmp[j*w+x]){on=1;break}dil[y*w+x]=on&&!line[y*w+x]?1:0}
+  // 5) تعبئة مكان الحروف من البكسلات المجاورة السليمة (انتشار تدريجي)
+  const known=new Uint8Array(w*h),F=new Float32Array(w*h*3);let rem=0;
+  for(let y=0;y<h;y++)for(let x=0;x<w;x++){const k=y*w+x;if(dil[k]){rem++}else{known[k]=1;const i=P(x,y);F[k*3]=D[i];F[k*3+1]=D[i+1];F[k*3+2]=D[i+2]}}
+  if(rem===w*h){for(let y=0;y<h;y++)for(let x=0;x<w;x++){const k=y*w+x;for(let c=0;c<3;c++)F[k*3+c]=ref(x,y,c)}rem=0}
+  for(let it=0;it<80&&rem>0;it++){const upd=[];
+    for(let y=0;y<h;y++)for(let x=0;x<w;x++){const k=y*w+x;if(known[k])continue;let r=0,g=0,b=0,n=0;
+      for(let dy=-1;dy<=1;dy++){const yy=y+dy;if(yy<0||yy>=h)continue;for(let dx=-1;dx<=1;dx++){const xx=x+dx;if(xx<0||xx>=w)continue;const kk=yy*w+xx;if(known[kk]){r+=F[kk*3];g+=F[kk*3+1];b+=F[kk*3+2];n++}}}
+      if(n)upd.push(k,r/n,g/n,b/n)}
+    if(!upd.length)break;
+    for(let j=0;j<upd.length;j+=4){const k=upd[j];F[k*3]=upd[j+1];F[k*3+1]=upd[j+2];F[k*3+2]=upd[j+3];known[k]=1;rem--}}
+  const out=document.createElement("canvas");out.width=w;out.height=h;const og=out.getContext("2d"),id=og.createImageData(w,h);
+  for(let y=0;y<h;y++)for(let x=0;x<w;x++){const k=y*w+x,o=k*4,i=P(x,y);for(let c=0;c<3;c++)id.data[o+c]=dil[k]?Math.round(F[k*3+c]):D[i+c];id.data[o+3]=255}
+  og.putImageData(id,0,0);return out.toDataURL("image/png");
+}catch(e){return null}}
 function inpaint(wrap,W,x0,y0,bw,bh,bg){try{
-  const cv=wrap.querySelector("canvas"),k=cv.width/W,X=Math.round(x0*k),Y=Math.round(y0*k),w=Math.max(2,Math.round(bw*k)),h=Math.max(2,Math.round(bh*k));
-  if(w*h>360000||X<4||Y<4||X+w+5>cv.width||Y+h+5>cv.height)return null;
-  const ctx=cv.getContext("2d"),B=[1,3,5].map(i=>parseInt(bg.slice(i,i+2),16));
-  const gl=ctx.getImageData(X-4,Y,3,h).data,gr=ctx.getImageData(X+w+1,Y,3,h).data,gt=ctx.getImageData(X,Y-4,w,3).data,gb=ctx.getImageData(X,Y+h+1,w,3).data;
-  const avg=(d,ix)=>{let r=0,g=0,b=0,n=0;for(const i of ix){const dd=Math.abs(d[i]-B[0])+Math.abs(d[i+1]-B[1])+Math.abs(d[i+2]-B[2]);if(dd<150){r+=d[i];g+=d[i+1];b+=d[i+2];n++}}return n?[r/n,g/n,b/n]:B};
-  const L=[],R=[],T=[],Bo=[];
-  for(let y=0;y<h;y++){const o=y*12;L.push(avg(gl,[o,o+4,o+8]));R.push(avg(gr,[o,o+4,o+8]))}
-  for(let x=0;x<w;x++){const ix=[x*4,(w+x)*4,(2*w+x)*4];T.push(avg(gt,ix));Bo.push(avg(gb,ix))}
-  const sm=a=>a.map((_,i)=>{let r=0,g=0,b=0,n=0;for(let j=Math.max(0,i-3);j<=Math.min(a.length-1,i+3);j++){r+=a[j][0];g+=a[j][1];b+=a[j][2];n++}return[r/n,g/n,b/n]});
-  const SL=sm(L),SR=sm(R),ST=sm(T),SB=sm(Bo),oc=document.createElement("canvas");oc.width=w;oc.height=h;
-  const og=oc.getContext("2d"),id=og.createImageData(w,h);
-  for(let y=0;y<h;y++){const v=y/(h-1);for(let x=0;x<w;x++){const u=x/(w-1),i=(y*w+x)*4;for(let c=0;c<3;c++){const hv=SL[y][c]*(1-u)+SR[y][c]*u,vv=ST[x][c]*(1-v)+SB[x][c]*v;id.data[i+c]=Math.round((hv+vv)/2)}id.data[i+3]=255}}
-  og.putImageData(id,0,0);return oc.toDataURL("image/png");
+  const cv=wrap.querySelector("canvas"),k=cv.width/W;
+  let X=Math.max(0,Math.round(x0*k)),Y=Math.max(0,Math.round(y0*k)),w=Math.round(bw*k),h=Math.round(bh*k);
+  w=Math.min(w,cv.width-X);h=Math.min(h,cv.height-Y);
+  if(w<3||h<3||w*h>2500000)return null;
+  const ctx=cv.getContext("2d"),src=ctx.getImageData(X,Y,w,h),d=src.data,B=[1,3,5].map(i=>parseInt(bg.slice(i,i+2),16));
+  const med=a=>{a.sort((p,q)=>p-q);return a[a.length>>1]},rowBg=[];
+  for(let y=0;y<h;y++){const R=[],G=[],Bl=[];for(let x=0;x<w;x++){const i=(y*w+x)*4;R.push(d[i]);G.push(d[i+1]);Bl.push(d[i+2])}const m=[med(R),med(G),med(Bl)];rowBg.push(Math.abs(m[0]-B[0])+Math.abs(m[1]-B[1])+Math.abs(m[2]-B[2])>110?B:m)}
+  const mk=new Uint8Array(w*h);
+  for(let y=0;y<h;y++){const r=rowBg[y];for(let x=0;x<w;x++){const i=(y*w+x)*4;if(Math.abs(d[i]-r[0])+Math.abs(d[i+1]-r[1])+Math.abs(d[i+2]-r[2])>40)mk[y*w+x]=1}}
+  const rad=Math.max(2,Math.round(h*.06)),t1=new Uint8Array(w*h),m2=new Uint8Array(w*h);
+  for(let y=0;y<h;y++){const p=new Int32Array(w+1);for(let x=0;x<w;x++)p[x+1]=p[x]+mk[y*w+x];for(let x=0;x<w;x++)t1[y*w+x]=(p[Math.min(w,x+rad+1)]-p[Math.max(0,x-rad)])>0?1:0}
+  for(let x=0;x<w;x++){const p=new Int32Array(h+1);for(let y=0;y<h;y++)p[y+1]=p[y]+t1[y*w+x];for(let y=0;y<h;y++)m2[y*w+x]=(p[Math.min(h,y+rad+1)]-p[Math.max(0,y-rad)])>0?1:0}
+  const out=ctx.createImageData(w,h),o=out.data,L=new Int32Array(w),R=new Int32Array(w);
+  for(let y=0;y<h;y++){
+    let c=-1;for(let x=0;x<w;x++){if(!m2[y*w+x])c=x;L[x]=c}
+    c=-1;for(let x=w-1;x>=0;x--){if(!m2[y*w+x])c=x;R[x]=c}
+    for(let x=0;x<w;x++){const i=(y*w+x)*4;
+      if(!m2[y*w+x]){o[i]=d[i];o[i+1]=d[i+1];o[i+2]=d[i+2];o[i+3]=255;continue}
+      const l=L[x],r=R[x];
+      if(l>=0&&r>=0){const t=(x-l)/(r-l),a=(y*w+l)*4,b=(y*w+r)*4;for(let q=0;q<3;q++)o[i+q]=Math.round(d[a+q]*(1-t)+d[b+q]*t)}
+      else if(l>=0||r>=0){const a=(y*w+(l>=0?l:r))*4;for(let q=0;q<3;q++)o[i+q]=d[a+q]}
+      else{const rb=rowBg[y];for(let q=0;q<3;q++)o[i+q]=rb[q]}
+      o[i+3]=255}
+  }
+  const oc=document.createElement("canvas");oc.width=w;oc.height=h;oc.getContext("2d").putImageData(out,0,0);
+  return oc.toDataURL("image/png");
 }catch(e){return null}}
 function sampleC(wrap,g,W,top,bh,bg){try{const cv=wrap.querySelector("canvas"),k=cv.width/W,x=Math.max(0,Math.floor(g.l*k)),y=Math.max(0,Math.floor(top*k)),w=Math.max(1,Math.min(cv.width-x,Math.ceil((g.r-g.l)*k))),h=Math.max(1,Math.min(cv.height-y,Math.ceil(bh*k))),d=cv.getContext("2d").getImageData(x,y,w,h).data,B=[1,3,5].map(i=>parseInt(bg.slice(i,i+2),16));let best=-1,rgb=[0,0,0];for(let i=0;i<d.length;i+=4){const s=Math.abs(d[i]-B[0])+Math.abs(d[i+1]-B[1])+Math.abs(d[i+2]-B[2]);if(d[i+3]>0&&s>best){best=s;rgb=[d[i],d[i+1],d[i+2]]}}if(best<60)return"#000000";return"#"+rgb.map(v=>v.toString(16).padStart(2,"0")).join("")}catch(e){return"#000000"}}
 function isBold(page,fn){try{const f=page.commonObjs.get(fn);return !!(f&&(f.bold||f.black||/bold|black|heavy|demi/i.test(f.name||"")))}catch(e){return false}}
 const AR_RE=/[\u0600-\u06FF\u0750-\u077F\uFB50-\uFDFF\uFE70-\uFEFF]/;
 const fIdx=k=>{const i=FONTS.findIndex(f=>f[0].includes(k));return i<0?0:i};
-const arIdx=rn=>fIdx(/naskh|traditional|simplified|typesetting|majalla|amiri|scheherazade/i.test(rn||"")?"Amiri":"Noto Sans Arabic");
+const arIdx=(rn,ff)=>fIdx(/traditional|amiri|scheherazade|naskh/i.test(rn||"")||(!rn&&/(^|[,\s])serif/.test(ff||"")&&!/sans/.test(ff||""))?"Amiri":"Noto Sans Arabic");
+async function bestFont(text,sz,bw,rn){
+  const serif=/traditional|naskh|amiri|scheherazade|lateef/i.test(rn||""),mixed=/simplified|majalla|typesetting|arabic/i.test(rn||"");
+  const C=serif?["Amiri","Noto Naskh"]:mixed?["Noto Naskh","Noto Sans Arabic","Tajawal","Cairo"]:["Noto Sans Arabic","Cairo","Tajawal","IBM Plex","Almarai","Readex"];
+  const cx=document.createElement("canvas").getContext("2d");let best=-1,bd=1e9;
+  for(const n of C){const i=fIdx(n);if(i===0&&n!=="IBM Plex")continue;
+    try{await Promise.race([document.fonts.load(sz+"px "+FONTS[i][1],text),new Promise(r=>setTimeout(r,1500))])}catch(e){}
+    try{if(!document.fonts.check(sz+"px "+FONTS[i][1],text))continue}catch(e){}
+    cx.font=sz+"px "+FONTS[i][1];const mw=cx.measureText(text).width;if(!mw||!bw)continue;
+    const dd=Math.abs(Math.log(bw/mw));if(dd<bd){bd=dd;best=i}}
+  return best<0?fIdx(serif?"Amiri":"Noto Sans Arabic"):best;
+}
+
 const eff=(o,t)=>(o.f>=FBASE&&AR_RE.test(t??o.t??""))?(o.af??fIdx("Noto Sans Arabic")):o.f;
 function realName(page,fn){try{const f=page.commonObjs.get(fn);return(f&&f.name)||""}catch(e){return""}}
 const OF={};function origFont(fn,st){if(!fn)return 0;if(OF[fn]!=null)return OF[fn];FONTS.push(["الخط الأصلي "+(Object.keys(OF).length+1),'"'+fn+'",'+((st&&st.fontFamily)||"sans-serif")]);return OF[fn]=FONTS.length-1}
@@ -390,12 +1783,12 @@ async function buildDet(wrap,pg,page,s){
     let text="",pv=null;
     g.it.forEach(i=>{if(pv){const gap=rtl?pv.x-(i.x+i.w):i.x-(pv.x+pv.w);if(gap>g.h*.12&&!/\s$/.test(text)&&!/^\s/.test(i.s))text+=" "}text+=i.s;pv=i});
     text=text.normalize("NFKC");
-    const top=g.b-g.h*.9,bh=g.h*1.15,d=document.createElement("div");d.className="det";
+    const top=g.b-g.h*.96,bh=g.h*1.34,d=document.createElement("div");d.className="det";
     Object.assign(d.style,{left:g.l/W*100+"%",top:top/H*100+"%",width:(g.r-g.l)/W*100+"%",height:bh/H*100+"%"});
     d.onclick=async e=>{
       e.stopPropagation();
-      const AR=AR_RE.test(text),rn=realName(page,g.fn),ocr=g.fn===null,afi=arIdx(rn);
-      const fi=AR?afi:(ocr?0:origFont(g.fn,tc.styles[g.fn]));
+      const AR=AR_RE.test(text),rn=realName(page,g.fn),ocr=g.fn===null,afi=arIdx(rn,(tc.styles[g.fn]||{}).fontFamily);
+      const fi=AR?await bestFont(text,Math.min(160,Math.max(6,Math.round(ocr?g.h*.78:g.h))),g.r-g.l,rn):(ocr?0:origFont(g.fn,tc.styles[g.fn]));
       let sz=Math.min(160,Math.max(6,Math.round(ocr?g.h*.78:g.h)));
       try{await document.fonts.load(sz+"px "+FONTS[fi][1],text)}catch(e2){}
       let asc=.93*sz,dsc=.26*sz;
@@ -408,7 +1801,7 @@ async function buildDet(wrap,pg,page,s){
         const mm=cx.measureText("Hgع");asc=mm.fontBoundingBoxAscent||asc;dsc=mm.fontBoundingBoxDescent||dsc;
       }catch(e2){}
       const off=(1.2*sz-(asc+dsc))/2+asc;
-      const bgc=sampleBg(wrap,g,W,top,bh),o={x:(rtl?g.r:g.l)/W,an:rtl?"r":"l",y:(g.b-off)/H,t:text,f:fi,af:afi,c:sampleC(wrap,g,W,top,bh,bgc),b:isBold(page,g.fn),s:sz,key,cover:{x:(g.l-1)/W,y:(top-1)/H,w:(g.r-g.l+2)/W,h:(bh+2)/H,bg:bgc,img:inpaint(wrap,W,g.l-1,top-1,g.r-g.l+2,bh+2,bgc)}};
+      const bgc=sampleBg(wrap,g,W,top,bh),cimg=(await inpaintHi(page,g.l-1,top-1,g.r-g.l+2,bh+2,bgc))||inpaint(wrap,W,g.l-1,top-1,g.r-g.l+2,bh+2,bgc),o={x:(rtl?g.r:g.l)/W,an:rtl?"r":"l",y:(g.b-off)/H,t:text,f:fi,af:afi,c:sampleC(wrap,g,W,top,bh,bgc),b:isBold(page,g.fn),s:sz,key,cover:{x:(g.l-1)/W,y:(top-1)/H,w:(g.r-g.l+2)/W,h:(bh+2)/H,bg:bgc,img:cimg}};
       pg.ov.push(o);d.remove();
       const el=mkOv(pg,o,s,wrap);wrap.append(el);el.focus();
     };
@@ -416,7 +1809,8 @@ async function buildDet(wrap,pg,page,s){
   });
 }
 function mkOv(pg,o,s,wrap){
-  if(o.cover){const c=document.createElement("div");c.className="cover";Object.assign(c.style,{left:o.cover.x*100+"%",top:o.cover.y*100+"%",width:o.cover.w*100+"%",height:o.cover.h*100+"%",background:o.cover.img?"url("+o.cover.img+") 0 0/100% 100% no-repeat":(o.cover.bg||"#fff")});wrap.append(c)}
+  let cvEl=null;
+  if(o.cover){const c=document.createElement("div");c.className="cover";Object.assign(c.style,{left:o.cover.x*100+"%",top:o.cover.y*100+"%",width:o.cover.w*100+"%",height:o.cover.h*100+"%",background:o.cover.img?"url("+o.cover.img+") 0 0/100% 100% no-repeat":(o.cover.bg||"#fff")});cvEl=c;wrap.append(c)}
   const el=document.createElement("div"),t=document.createElement("span"),rz=document.createElement("div"),tb=document.createElement("div");
   el.className="ov";t.className="t";t.contentEditable="false";t.dir="auto";t.textContent=o.t;t.setAttribute("aria-label","نص مضاف");rz.className="rzt";tb.className="tb";
   el.style.left=o.x*100+"%";el.style.top=o.y*100+"%";styleOv(el,o,s);
@@ -454,9 +1848,20 @@ function mkOv(pg,o,s,wrap){
   const r1=document.createElement("div"),r2=document.createElement("div");r1.className="r1";r2.className="r2";
   const al=mkB(o.an==="r"?"يمين":o.an==="c"?"وسط":"يسار","محاذاة النص: يسار / وسط / يمين",()=>{const r0=el.getBoundingClientRect(),wr=wrap.getBoundingClientRect(),nxt=o.an==="r"?"l":o.an==="c"?"r":"c",f=nxt==="c"?.5:nxt==="r"?1:0;o.an=nxt;o.x=Math.min(1,Math.max(0,(r0.left+f*r0.width-wr.left)/wr.width));el.style.left=o.x*100+"%";anch();al.textContent=nxt==="r"?"يمين":nxt==="c"?"وسط":"يسار";place()});
   const more=mkB("Aa","خيارات الخط واللون",()=>{tb.classList.toggle("open");more.classList.toggle("on",tb.classList.contains("open"));place()});
-  r1.append(mv,ed,mb,szl,pb,bb,al,more,d);r2.append(nb,sel,col,...sw);tb.append(r1,r2);
+  const dup=mkB("⧉","تكرار النص",()=>{const n={...o,x:Math.min(1,o.x+.03),y:Math.min(.96,o.y+.025)};delete n.cover;delete n.key;pg.ov.push(n);const e2=mkOv(pg,n,s,wrap);wrap.append(e2);if(e2.select)e2.select();toast("تم تكرار النص. اسحب النسخة إلى مكانها.")});
+  const cpy=mkB("نسخ","نسخ النص للصقه في صفحة أخرى",()=>{const n={...o};delete n.cover;delete n.key;window.__clip=n;toast("تم نسخ النص. اضغط «لصق نص» في شريط أي صفحة.");render()});
+  r1.append(mv,ed,mb,szl,pb,bb,al,more,d);r2.append(nb,dup,cpy,sel,col,...sw);
+  if(o.cover){
+    const applyCover=()=>{if(cvEl)cvEl.style.background=o.cover.img?"url("+o.cover.img+") 0 0/100% 100% no-repeat":(o.cover.bg||"#fff")};
+    const bl=document.createElement("span");bl.textContent="الخلفية:";bl.style.fontSize="12px";
+    const cbg=document.createElement("input");cbg.type="color";cbg.value=/^#[0-9a-f]{6}$/i.test(o.cover.bg||"")?o.cover.bg:"#ffffff";cbg.setAttribute("aria-label","لون خلفية النص");
+    cbg.oninput=()=>{o.cover.bg=cbg.value;o.cover.img0=o.cover.img0||o.cover.img;o.cover.img=null;applyCover()};
+    const eye=mkB("قطّارة","التقاط لون الخلفية من الصفحة",()=>{window.pickBgFor={o,applyCover,cbg};toast("اضغط على نقطة من خلفية الصفحة لالتقاط لونها.")});
+    const auto=mkB("تلقائي","استعادة الخلفية التلقائية",()=>{if(o.cover.img0){o.cover.img=o.cover.img0;applyCover()}});
+    r2.append(bl,eye,cbg,auto)}
+  tb.append(r1,r2);
   tb.onpointerdown=e=>{if(!/SELECT|INPUT/.test(e.target.tagName))e.preventDefault()};
-  el.append(t,rz,tb);el.startEdit=startEdit;el.focus=startEdit;
+  el.append(t,rz,tb);el.startEdit=startEdit;el.select=act;el.focus=startEdit;
   requestAnimationFrame(anch);setTimeout(anch,400);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(anch);
   return el;
 }
@@ -521,7 +1926,7 @@ $("pn").onclick=()=>{
   render();toast(has?"تمت إزالة ترقيم الصفحات.":"تمت إضافة أرقام عربية أسفل كل صفحة"+(skip?" (تخطّيت "+skip+" صفحة مُدارة)":"")+". اضغط الزر مرة أخرى لإزالتها.");
 };
 const sg=$("sg"),sc=$("sgc"),sk=sc.getContext("2d");let dn=false,inked=false;
-$("sig").onclick=()=>{if(!pages.length)return toast("افتح ملف PDF أولًا.");sg.classList.add("on");sc.width=sc.clientWidth*2;sc.height=sc.clientHeight*2;inked=false};
+$("sig").onclick=()=>{if(!pages.length)return toast("افتح ملف PDF أولًا.");sg.classList.add("on");try{$("sgsv").style.display=localStorage.getItem("alfalqi_sig")?"":"none"}catch(e){}sc.width=sc.clientWidth*2;sc.height=sc.clientHeight*2;inked=false};
 const spt=e=>{const r=sc.getBoundingClientRect();return[(e.clientX-r.left)*sc.width/r.width,(e.clientY-r.top)*sc.height/r.height]};
 sc.onpointerdown=e=>{e.preventDefault();sc.setPointerCapture(e.pointerId);dn=inked=true;const[x,y]=spt(e);sk.strokeStyle=$("sgcol").value;sk.lineWidth=5;sk.lineCap=sk.lineJoin="round";sk.beginPath();sk.moveTo(x,y);sk.lineTo(x+.1,y+.1);sk.stroke();sk.beginPath();sk.moveTo(x,y)};
 sc.onpointermove=e=>{if(!dn)return;const[x,y]=spt(e);sk.lineTo(x,y);sk.stroke();sk.beginPath();sk.moveTo(x,y)};
@@ -534,14 +1939,15 @@ $("sgok").onclick=()=>{
   for(let y=0;y<H;y++)for(let x=0;x<W;x++)if(d[(y*W+x)*4+3]>0){if(x<x0)x0=x;if(x>x1)x1=x;if(y<y0)y0=y;if(y>y1)y1=y}
   const p=8;x0=Math.max(0,x0-p);y0=Math.max(0,y0-p);x1=Math.min(W-1,x1+p);y1=Math.min(H-1,y1+p);
   const c=document.createElement("canvas");c.width=x1-x0+1;c.height=y1-y0+1;c.getContext("2d").drawImage(sc,x0,y0,c.width,c.height,0,0,c.width,c.height);
+  try{localStorage.setItem("alfalqi_sig",c.toDataURL("image/png"))}catch(e){}
   c.toBlob(b=>{sg.classList.remove("on");putImg(new File([b],"sig.png",{type:"image/png"}),.25);toast("اسحب التوقيع لمكانه وغيّر حجمه بالدائرة الخضراء.")},"image/png");
 };
 const HU=[],HR=[];let hLast=null,hP=null;
-const hJ=()=>JSON.stringify(pages.map(p=>[p.d,p.i,p.rot,p.nat,p.ov.filter(o=>o.t.trim()||o.cover),(p.img||[]).map(({b,u,fresh,...r})=>r)]));
-const hC=()=>pages.map(p=>({...p,sel:false,ov:JSON.parse(JSON.stringify(p.ov.filter(o=>o.t.trim()||o.cover))),img:(p.img||[]).map(im=>({...im,fresh:0}))}));
+const hJ=()=>JSON.stringify(pages.map(p=>[p.d,p.i,p.rot,p.nat,p.ov.filter(o=>o.t.trim()||o.cover),(p.img||[]).map(({b,u,fresh,...r})=>r),p.an||[]]));
+const hC=()=>pages.map(p=>({...p,sel:false,ov:JSON.parse(JSON.stringify(p.ov.filter(o=>o.t.trim()||o.cover))),img:(p.img||[]).map(im=>({...im,fresh:0})),an:JSON.parse(JSON.stringify(p.an||[]))}));
 const updUR=()=>{$("ud").disabled=!HU.length;$("rd").disabled=!HR.length};
 function track(){const j=hJ();if(j===hLast)return;if(hLast!==null){HU.push({j:hLast,p:hP});if(HU.length>100)HU.shift()}hLast=j;hP=hC();HR.length=0;updUR()}
-function hApply(s){pages=s.p.map(p=>({...p,sel:false,ov:JSON.parse(JSON.stringify(p.ov)),img:p.img.map(im=>({...im}))}));hLast=s.j;hP=hC();cur=null;render();updUR()}
+function hApply(s){pages=s.p.map(p=>({...p,sel:false,ov:JSON.parse(JSON.stringify(p.ov)),img:p.img.map(im=>({...im})),an:JSON.parse(JSON.stringify(p.an||[]))}));hLast=s.j;hP=hC();cur=null;render();updUR()}
 function undo(){track();if(!HU.length)return;HR.push({j:hLast,p:hP});hApply(HU.pop())}
 function redo(){if(!HR.length)return;HU.push({j:hLast,p:hP});hApply(HR.pop())}
 $("ud").onclick=undo;$("rd").onclick=redo;
@@ -565,7 +1971,20 @@ async function textPng(txt,o){
   const blob=await new Promise(r=>c.toBlob(r,"image/png"));
   return {data:new Uint8Array(await blob.arrayBuffer()),w:c.width/K,h:c.height/K};
 }
-async function saveFile(name,bytes,mime){const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([bytes],{type:mime||"application/pdf"}));a.download=name;document.body.append(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},1500)}
+let rdUrl=null;
+async function saveFile(name,bytes,mime){
+  mime=mime||"application/pdf";
+  const blob=new Blob([bytes],{type:mime}),mob=/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)||(navigator.maxTouchPoints>1&&/Mac/i.test(navigator.platform));
+  if(!mob){const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=name;document.body.append(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},1500);return}
+  if(rdUrl)URL.revokeObjectURL(rdUrl);rdUrl=URL.createObjectURL(blob);
+  $("rdn").textContent=name+" — "+(blob.size/1048576).toFixed(2)+" MB";
+  const d=$("rdd");d.href=rdUrl;d.download=name;$("rdo").href=rdUrl;
+  const file=new File([blob],name,{type:mime}),can=!!(navigator.canShare&&navigator.canShare({files:[file]})),sh=$("rds");
+  sh.style.display=can?"":"none";
+  sh.onclick=async()=>{try{await navigator.share({files:[file],title:name})}catch(e){if(!e||e.name!=="AbortError")toast("تعذّرت المشاركة، استخدم «تنزيل الملف».")}};
+  $("rdm").classList.add("on");
+}
+$("rdx").onclick=()=>$("rdm").classList.remove("on");
 const WM={t:"",op:.18},META={title:"",author:""};
 async function buildPdf(list){
   const {PDFDocument,degrees,rgb}=PDFLib;
@@ -584,6 +2003,9 @@ async function buildPdf(list){
       const im=await textPng(o.t,o),img=await out.embedPng(im.data);
       cp.drawImage(img,{x:o.x*w-im.w*(o.an==="c"?.5:o.an==="r"?1:0),y:h-o.y*h-im.h,width:im.w,height:im.h});
     }
+    for(const a of pg.an||[]){const hc=a.t==="bk"?"#000000":a.c,col=rgb(...[1,3,5].map(i=>parseInt(hc.slice(i,i+2),16)/255));
+      if(a.t==="pn"){for(let i=1;i<a.pts.length;i++)cp.drawLine({start:{x:a.pts[i-1][0]*w,y:h-a.pts[i-1][1]*h},end:{x:a.pts[i][0]*w,y:h-a.pts[i][1]*h},thickness:a.s,color:col,lineCap:PDFLib.LineCapStyle.Round})}
+      else cp.drawRectangle({x:a.x*w,y:h-(a.y+a.h)*h,width:a.w*w,height:a.h*h,color:col,opacity:a.t==="hl"?.38:1,borderWidth:0})}
     if(WM.t){wmI??=await textPng(WM.t,{s:Math.max(24,Math.round(Math.min(w,h)/7)),f:0,c:"#808080",b:true});wmE??=await out.embedPng(wmI.data);const cs=Math.SQRT1_2,sn=Math.SQRT1_2;cp.drawImage(wmE,{x:w/2-(wmI.w/2*cs-wmI.h/2*sn),y:h/2-(wmI.w/2*sn+wmI.h/2*cs),width:wmI.w,height:wmI.h,rotate:degrees(45),opacity:WM.op})}
   }
   if(META.title)out.setTitle(META.title);if(META.author)out.setAuthor(META.author);out.setCreator("الفلقي لتعديل PDF");out.setProducer("الفلقي لتعديل PDF");
@@ -629,12 +2051,66 @@ $("mgok").onclick=()=>{const by={};pages.forEach(p=>(by[p.d]??=[]).push(p));page
 $("tls").onclick=()=>{if(!pages.length)return toast("افتح ملف PDF أولًا.");$("wmt").value=WM.t;$("wmo").value=String(WM.op.toFixed(2));$("mti").value=META.title;$("mau").value=META.author;$("qsel").textContent=pages.every(p=>p.sel)?"إلغاء التحديد":"تحديد الكل";$("tlm").classList.add("on")};
 $("tlx").onclick=()=>$("tlm").classList.remove("on");
 $("tlok").onclick=()=>{WM.t=$("wmt").value.trim();WM.op=parseFloat($("wmo").value)||.18;META.title=$("mti").value.trim();META.author=$("mau").value.trim();$("tlm").classList.remove("on");toast(WM.t?"سيُضاف «"+WM.t+"» كعلامة مائية عند التنزيل.":"تم حفظ الإعدادات.")};
-$("qrot").onclick=()=>{let sk=0;pages.forEach(p=>{if(p.ov.length||(p.img||[]).length)sk++;else p.rot=(p.rot+90)%360});$("tlm").classList.remove("on");render();if(sk)toast("تخطّيت "+sk+" صفحة فيها نص أو صور مضافة.")};
+$("qrot").onclick=()=>{let sk=0;pages.forEach(p=>{if(p.ov.length||(p.img||[]).length||(p.an||[]).length)sk++;else p.rot=(p.rot+90)%360});$("tlm").classList.remove("on");render();if(sk)toast("تخطّيت "+sk+" صفحة فيها نص أو صور مضافة.")};
 $("qrev").onclick=()=>{pages=pages.slice().reverse();$("tlm").classList.remove("on");render()};
 $("qsel").onclick=()=>{const all=pages.every(p=>p.sel);pages.forEach(p=>p.sel=!all);$("tlm").classList.remove("on");render()};
 $("qdel").onclick=()=>{const n=pages.filter(p=>p.sel).length;if(!n)return toast("حدّد صفحات بالمربعات أولًا.");pages=pages.filter(p=>!p.sel);$("tlm").classList.remove("on");render();toast("تم حذف "+n+" صفحة. يمكنك التراجع.")};
 
 $("ocg").onclick=async()=>{const L=pages.filter(p=>p.src&&!p.ocr);if(!L.length)return toast("لا توجد صفحات محوّلة من صور (أو تم تحليلها).");$("tlm").classList.remove("on");for(const p of L){if(!window.imgOcr)break;await window.imgOcr(p,$("ocl").value)}};
+// ===== باركود =====
+function loadBc(){if(window.bcOpen)return;const s=document.createElement("script");s.textContent=$("bcmod").textContent;document.head.append(s)}
+$("bcb").onclick=()=>{if(!pages.length)return toast("افتح ملف PDF أولًا.");try{loadBc();bcOpen()}catch(e){toast("تعذّر تشغيل الباركود: "+e.message)}};
+// ===== تعليقات =====
+let annMode=null,annColor="#ffd400",annW=4;
+const annNS="http://www.w3.org/2000/svg";
+function annNode(a,W,H,svg){let n;if(a.t==="pn"){n=document.createElementNS(annNS,"polyline");n.setAttribute("points",a.pts.map(p=>p[0]*W+","+p[1]*H).join(" "));n.setAttribute("fill","none");n.setAttribute("stroke",a.c);n.setAttribute("stroke-width",a.s*zoom);n.setAttribute("stroke-linecap","round");n.setAttribute("stroke-linejoin","round")}else{n=document.createElementNS(annNS,"rect");n.setAttribute("x",a.x*W);n.setAttribute("y",a.y*H);n.setAttribute("width",a.w*W);n.setAttribute("height",a.h*H);n.setAttribute("fill",a.t==="bk"?"#000":a.c);if(a.t==="hl")n.setAttribute("opacity",".38")}svg.append(n);return n}
+function annLayer(pg,wrap,W,H){
+  const svg=document.createElementNS(annNS,"svg");svg.setAttribute("width",W);svg.setAttribute("height",H);svg.style.cssText="position:absolute;left:0;top:0;pointer-events:none;z-index:1";
+  (pg.an||[]).forEach(a=>annNode(a,W,H,svg));wrap.append(svg);
+  wrap.addEventListener("pointerdown",e=>{
+    if(!annMode||e.target.closest(".ov,.im"))return;
+    e.preventDefault();wrap.setPointerCapture(e.pointerId);
+    const r=wrap.getBoundingClientRect(),px=ev=>[Math.min(1,Math.max(0,(ev.clientX-r.left)/r.width)),Math.min(1,Math.max(0,(ev.clientY-r.top)/r.height))],p0=px(e);
+    const a=annMode==="pen"?{t:"pn",pts:[p0],c:annColor,s:annW}:{t:annMode,x:p0[0],y:p0[1],w:0,h:0,c:annColor};
+    const node=annNode(a,W,H,svg);
+    wrap.onpointermove=ev=>{const p=px(ev);if(a.t==="pn"){a.pts.push(p);node.setAttribute("points",a.pts.map(q=>q[0]*W+","+q[1]*H).join(" "))}else{node.setAttribute("x",Math.min(p0[0],p[0])*W);node.setAttribute("y",Math.min(p0[1],p[1])*H);node.setAttribute("width",Math.abs(p[0]-p0[0])*W);node.setAttribute("height",Math.abs(p[1]-p0[1])*H);a.w=p[0]-p0[0];a.h=p[1]-p0[1]}};
+    wrap.onpointerup=wrap.onpointercancel=()=>{wrap.onpointermove=null;wrap.onpointerup=null;wrap.onpointercancel=null;
+      if(a.t==="pn"){if(a.pts.length<2){node.remove();return}}
+      else{const x=Math.min(a.x,a.x+a.w),y=Math.min(a.y,a.y+a.h);a.x=x;a.y=y;a.w=Math.abs(a.w);a.h=Math.abs(a.h);if(a.w*W<4||a.h*H<4){node.remove();return}}
+      (pg.an??=[]).push(a);track()};
+  });
+}
+function annSet(m){annMode=m;document.body.classList.toggle("ann",!!m);[["ah","hl"],["ap","pen"],["ab","bk"]].forEach(([id,k])=>$(id).classList.toggle("on",k===m));$("ann").classList.toggle("on",!!m);
+  if(m){if(addMode)$("txt").click();if(typeof editing!=="undefined"&&editing)$("edt").click();dropSel()}}
+$("ann").onclick=()=>{if(!pages.length)return toast("افتح ملف PDF أولًا.");annSet(annMode?null:"hl")};
+$("ah").onclick=()=>annSet("hl");$("ap").onclick=()=>annSet("pen");$("ab").onclick=()=>{annSet("bk");toast("المربع الأسود يخفي ما تحته في الملف المنزَّل، لكن النص الأصلي يبقى داخل الملف.")};
+$("aq").onclick=()=>annSet(null);$("ac").oninput=e=>{annColor=e.target.value};$("aw").onchange=e=>{annW=+e.target.value};
+// ===== دليل =====
+$("hlpb").onclick=()=>$("hlp").classList.add("on");$("hlx").onclick=()=>$("hlp").classList.remove("on");
+
+$("sgsv").onclick=async()=>{try{const u=localStorage.getItem("alfalqi_sig");if(!u)return;const bl=await (await fetch(u)).blob();sg.classList.remove("on");putImg(new File([bl],"sig.png",{type:"image/png"}),.25);toast("أُدرج توقيعك المحفوظ. اسحبه لمكانه.")}catch(e){toast("تعذّر استخدام التوقيع المحفوظ.")}};
+// ===== إضافة تاريخ اليوم =====
+function addTextAtView(t){const ws=[...document.querySelectorAll(".wrap")];if(!ws.length)return toast("افتح ملف PDF أولًا.");const mid=innerHeight/2;let bi=0,bd=1e9;ws.forEach((w,i)=>{const r=w.getBoundingClientRect(),d=r.top<=mid&&r.bottom>=mid?0:Math.min(Math.abs(r.top-mid),Math.abs(r.bottom-mid));if(d<bd){bd=d;bi=i}});const pg=pages[bi];if((pg.nat+pg.rot)%360)return toast("الصفحة مُدارة؛ أعدها لوضعها الأصلي أولًا.");const r=ws[bi].getBoundingClientRect(),y=Math.min(.9,Math.max(.03,(mid-r.top)/r.height));pg.ov.push({x:.5,an:"c",y,t,f:fIdx("Noto Sans Arabic"),c:"#000000",s:16});$("tlm").classList.remove("on");render()}
+$("qdh").onclick=()=>addTextAtView(new Intl.DateTimeFormat("ar-SA-u-ca-islamic-umalqura-nu-arab",{day:"numeric",month:"long",year:"numeric"}).format(new Date()));
+$("qdg").onclick=()=>addTextAtView(new Intl.DateTimeFormat("ar-SA-u-ca-gregory-nu-arab",{day:"numeric",month:"long",year:"numeric"}).format(new Date()));
+// ===== حفظ المشروع وفتحه =====
+const b64=u=>{let s="";for(let i=0;i<u.length;i+=32768)s+=String.fromCharCode.apply(null,u.subarray(i,i+32768));return btoa(s)};
+const unb64=t=>Uint8Array.from(atob(t),c=>c.charCodeAt(0));
+$("prs").onclick=async()=>{if(!pages.length)return toast("افتح ملفًا أولًا.");
+  try{toast("جارٍ تجهيز المشروع…");
+    const data={v:1,fn:$("fn").value,WM,META,docs:docs.map(d=>({name:d.name,b:b64(d.bytes)})),pages:pages.map(p=>({d:p.d,i:p.i,rot:p.rot,nat:p.nat,ov:p.ov,an:p.an||[],img:(p.img||[]).map(im=>({x:im.x,y:im.y,w:im.w,hh:im.hh,r:im.r,m:im.m,b:b64(im.b)}))}))};
+    const bytes=new TextEncoder().encode(JSON.stringify(data));$("tlm").classList.remove("on");
+    await saveFile((safeName()||"project")+".afq",bytes,"application/json");$("toast").style.display="none"}
+  catch(e){toast("تعذّر حفظ المشروع: "+((e&&e.message)||e))}};
+$("pro").onchange=async e=>{const f=e.target.files[0];e.target.value="";if(!f)return;
+  try{toast("جارٍ فتح المشروع…");const data=JSON.parse(await f.text());if(!data.docs||!data.pages)throw new Error("ملف مشروع غير صالح");
+    docs.length=0;
+    for(const d of data.docs){const bytes=unb64(d.b),pdf=await pdfjsLib.getDocument({data:bytes.slice()}).promise;docs.push({bytes,pdf,name:d.name})}
+    pages=data.pages.map(p=>({d:p.d,i:p.i,rot:p.rot,nat:p.nat,sel:false,ov:p.ov.map(o=>o.f>=FBASE?{...o,f:AR_RE.test(o.t)?(o.af??fIdx("Noto Sans Arabic")):0}:o),an:p.an||[],img:(p.img||[]).map(im=>{const b=unb64(im.b);return{x:im.x,y:im.y,w:im.w,hh:im.hh,r:im.r,m:im.m,b,u:URL.createObjectURL(new Blob([b],{type:im.m}))}})}));
+    Object.assign(WM,data.WM||{});Object.assign(META,data.META||{});if(data.fn)$("fn").value=data.fn;
+    HU.length=0;HR.length=0;hLast=null;$("tlm").classList.remove("on");render();toast("تم فتح المشروع. تابع من حيث توقفت.")}
+  catch(err){toast("تعذّر فتح المشروع: "+((err&&err.message)||err))}};
+
 render();
 </script>
 </body>
