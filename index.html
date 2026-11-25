@@ -123,7 +123,7 @@ body.ann .wrap{touch-action:none;cursor:crosshair}body.ann .det{display:none}
 <body>
 <header>
   <div class="brand"><span class="logo"><svg class="ic" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 14h6M9 17h4"/></svg></span><span class="nm">الفلقي<small>لتعديل PDF</small></span></div>
-  <div class="grp"><label class="btn hb" title="فتح / إضافة ملفات PDF"><svg class="ic" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg><span class="lb">فتح</span><input id="file" type="file" accept="application/pdf" multiple hidden></label><label class="btn hb" title="تحويل صورة إلى ملف PDF جديد"><svg class="ic" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></svg><span class="lb">صورة→PDF</span><input id="fimg" type="file" accept="image/*" multiple hidden></label><button class="hb" id="ocb" title="قراءة النص من صورة وتعديله"><svg class="ic" viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"/><path d="M7 8h8M7 12h10M7 16h6"/></svg><span class="lb">قراءة نص صورة</span></button><select id="imgfit" title="حجم صفحة PDF عند تحويل الصور" aria-label="حجم الصفحة"><option value="a4">A4</option><option value="a4full">A4 ملء</option><option value="a5">A5</option><option value="a3">A3</option><option value="letter">Letter</option><option value="img">بحجم الصورة</option></select></div>
+  <div class="grp"><label class="btn hb" title="فتح / إضافة ملفات PDF"><svg class="ic" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg><span class="lb">فتح</span><input id="file" type="file" accept="application/pdf" multiple hidden></label><label class="btn hb" title="تحويل صورة إلى ملف PDF جديد"><svg class="ic" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></svg><span class="lb">صورة→PDF</span><input id="fimg" type="file" accept="image/*" multiple hidden></label><button class="hb" id="ocb" title="قراءة النص من صورة وتعديله"><svg class="ic" viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"/><path d="M7 8h8M7 12h10M7 16h6"/></svg><span class="lb">قراءة نص صورة</span></button><select id="imgfit" title="حجم صفحة PDF عند تحويل الصور" aria-label="حجم الصفحة"><option value="a4">A4</option><option value="a4full">A4 ملء</option><option value="a5">A5</option><option value="a3">A3</option><option value="letter">Letter</option><option value="img">بحجم الصورة</option></select><label class="btn hb" title="تحويل ملف PDF إلى Word قابل للتحرير"><span class="lb">PDF→Word</span><input id="docxFile" type="file" accept="application/pdf" hidden></label></div>
   <div class="grp"><button class="hb" id="zo" title="تصغير">−</button><span id="zv">100%</span><button class="hb" id="zi" title="تكبير">+</button></div>
   <div class="grp"><button class="hb" id="ud" title="تراجع (Ctrl+Z)" aria-label="تراجع" disabled><svg class="ic" viewBox="0 0 24 24"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg><span class="lb">تراجع</span></button><button class="hb" id="rd" title="إعادة (Ctrl+Y)" aria-label="إعادة" disabled><svg class="ic" viewBox="0 0 24 24"><path d="m15 14 5-5-5-5"/><path d="M20 9H9.5a5.5 5.5 0 0 0 0 11H13"/></svg><span class="lb">إعادة</span></button></div>
   <div class="grp">
@@ -175,6 +175,7 @@ body.ann .wrap{touch-action:none;cursor:crosshair}body.ann .det{display:none}
 <div id="toast"></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+<script>window.ALFALQI_API_BASE="https://alfalqi-pdf-ocr.onrender.com";</script>
 <script type="text/plain" id="imgmod">
 (function(){
 const A4=842/595;
@@ -243,7 +244,25 @@ window.imgOcr=async function(pg,lang,auto){
   if(window.ocrBusy)return toast("يوجد تحليل جارٍ، انتظر حتى ينتهي.");
   window.ocrBusy=true;
   try{
-    toast("جارٍ تحسين الصورة وتحليل النص… قد يستغرق دقيقة في أول مرة.");
+    toast("جارٍ تحسين الصورة وتحليل النص…");
+    if(window.ALFALQI_API_BASE && pg.src && pg.src.blob){
+      try{
+        const fd=new FormData();fd.append("file",pg.src.blob,"scan-image.png");fd.append("language",lang||"ara+eng");
+        const response=await fetch(window.ALFALQI_API_BASE.replace(/\/$/,"")+"/api/ocr/image",{method:"POST",body:fd});
+        if(!response.ok)throw new Error("OCR API "+response.status);
+        const result=await response.json(),src=pg.src,sx=src.dw/result.image_width,sy=src.dh/result.image_height;
+        const remoteRows=(result.lines||[]).map(line=>({t:(line.text||"").trim().replace(/\s+/g," "),c:Number(line.confidence)||0,
+          x0:src.ox+line.bbox[0]*sx,x1:src.ox+line.bbox[2]*sx,y0:src.oy+line.bbox[1]*sy,y1:src.oy+line.bbox[3]*sy}))
+          .filter(o=>o.t.length>=2&&o.c>25&&(o.t.match(/[\p{L}\p{N}]/gu)||[]).length>=2&&(o.y1-o.y0)<120&&(o.x1-o.x0)>8);
+        if(remoteRows.length){
+          pg.ocr=remoteRows;render();
+          if(auto&&!document.body.classList.contains("editing"))document.getElementById("edt").click();
+          toast("اكتمل OCR عبر "+(result.engine||"الخادم")+" — "+remoteRows.length+" سطرًا.");
+          return;
+        }
+        throw new Error("لم يُرجع الخادم أسطرًا قابلة للاستخدام");
+      }catch(apiError){console.warn("Remote OCR unavailable; falling back to browser OCR",apiError);toast("تعذر الاتصال بمحرك الخادم؛ سيتم استخدام OCR المحلي.");}
+    }
     await loadTess();
     const langs=(lang||"ara").split("+"),c=await prep(pg.src.blob);
     let w;const lg=m=>{if(m&&typeof m.progress==="number"){const pc=Math.round(m.progress*100),st=/load|init|download/i.test(m.status||"")?"تحميل نموذج اللغة":"قراءة النص";toast(st+" "+pc+"٪ …")}};
@@ -1618,6 +1637,19 @@ async function load(files){
 }
 async function fitW(){const pg=pages[0];if(!pg){render();return}const p=await docs[pg.d].pdf.getPage(pg.i),v=p.getViewport({scale:1,rotation:(pg.nat+pg.rot)%360});zoom=Math.min(1.4,Math.max(.4,(innerWidth-28)/v.width));render()}
 $("file").onchange=e=>{load([...e.target.files]);e.target.value=""};
+$("docxFile").onchange=async e=>{
+  const file=e.target.files&&e.target.files[0];e.target.value="";if(!file)return;
+  if(!window.ALFALQI_API_BASE)return toast("خدمة التحويل غير مهيأة بعد.");
+  try{
+    toast("جارٍ رفع PDF وتحويله إلى Word…");
+    const fd=new FormData();fd.append("file",file,file.name);
+    const response=await fetch(window.ALFALQI_API_BASE.replace(/\/$/,"")+"/api/convert/pdf-to-docx",{method:"POST",body:fd});
+    if(!response.ok){let message="فشل التحويل ("+response.status+")";try{const body=await response.json();message=body.detail||message;}catch(_){}throw new Error(message);}
+    const blob=await response.blob(),url=URL.createObjectURL(blob),a=document.createElement("a");
+    a.href=url;a.download=file.name.replace(/\.pdf$/i,"")+".docx";document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),30000);
+    toast("تم تحويل الملف إلى Word بنجاح.");
+  }catch(err){console.error(err);toast("تعذر تحويل PDF إلى Word: "+(err.message||err));}
+};
 function loadImgModule(){if(window.imgLoad)return;const s=document.createElement("script");s.textContent=$("imgmod").textContent;document.head.append(s)}
 const fimg=$("fimg");if(fimg)fimg.onchange=e=>{const fs=[...e.target.files];e.target.value="";try{loadImgModule();imgLoad(fs)}catch(err){toast("تعذّر تشغيل تحويل الصور: "+err.message)}};
 addEventListener("dragover",e=>{e.preventDefault();document.body.classList.add("drop")});
