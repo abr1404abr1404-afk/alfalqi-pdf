@@ -152,7 +152,10 @@ def _order(rows):
     for row in rows:
         cy=(row["bbox"][1]+row["bbox"][3])/2; h=max(1,row["bbox"][3]-row["bbox"][1])
         band=next((b for b in reversed(bands[-3:]) if abs(cy-sum((x["bbox"][1]+x["bbox"][3])/2 for x in b)/len(b)) <= .55*max(h,sum(x["bbox"][3]-x["bbox"][1] for x in b)/len(b))),None)
-        (band if band is not None else bands.append([row]) or bands[-1]).append(row) if band is not None else None
+        if band is None:
+            bands.append([row])
+        else:
+            band.append(row)
     out=[]
     for band in bands:
         band.sort(key=lambda r:r["bbox"][0],reverse=any(_arabic(r["text"]) for r in band))
