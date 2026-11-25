@@ -1,0 +1,11 @@
+fastapi>=0.115,<1
+uvicorn[standard]>=0.30,<1
+python-multipart>=0.0.9
+pillow>=10.3
+numpy>=1.26,<2
+opencv-python-headless>=4.10,<5
+pytesseract>=0.3.13
+PyMuPDF>=1.24
+paddlepaddle==3.2.0
+paddleocr>=3.3,<4
+pdf2docx>=0.5.8
